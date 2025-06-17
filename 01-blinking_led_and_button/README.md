@@ -13,17 +13,19 @@ This project demonstrates a basic input/output interaction with an Arduino:
 
 - 1x Arduino Uno (or compatible board)
 - 1x LED
-- 1x 220Ω resistor (for the LED)
 - 1x Push button
-- 1x 10kΩ resistor (for the button pull-down)
+- 2x 10kΩ resistor 
 - Breadboard and jumper wires
 
 ## Circuit Description
 
-- The LED is connected in series with a 220Ω resistor to a digital output pin (e.g., pin 13).
+- The LED is connected in series with a 10kΩ resistor to a digital output pin (e.g., pin 13).
 - The button is connected to a digital input pin (e.g., pin 4) with a 10kΩ pull-down resistor to ground.
 - Pressing the button sends a HIGH signal to the input pin, triggering a state change in the blinking behavior.
 
 ## Circuit Diagram
 
 You can find the schematic and wiring diagram in the `circuit/` folder.
+
+![Shematic and wiring diagram](./asets/blinking_led_and_button_shemma.png)
+
