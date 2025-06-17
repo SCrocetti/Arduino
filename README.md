@@ -4,9 +4,7 @@ Welcome to the **Arduino** repository! This repository is intended to host vario
 
 ## 🔧 Projects
 
-Currently, there are no projects available.
-
-Stay tuned—new projects will be added soon!
+1. 01-Blinking led and button
 
 ## 📁 Structure
 
