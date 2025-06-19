@@ -5,7 +5,7 @@ Welcome to the **Arduino** repository! This repository is intended to host vario
 ## 🔧 Projects
 
 1. 01-Blinking led and button
-
+3. 03-Led matrix
 ## 📁 Structure
 
 Each project will have its own folder with the following typical structure:
