@@ -1,35 +1,26 @@
-const bool on = false;
-const long delay_time = 100;
-const int filablanca1 = 2;
-const int filablanca2 = 3;
-const int filanegra1 = 8;
-const int filanegra2 = 9;
+const bool on = true;
+const long delay_time = 300;
 void setup() {
   // put your setup code here, to run once:
-  for(int i=2;i<10;i++){
+  for(int i=2;i<14;i++){
     pinMode(i, OUTPUT);
+  }
+  for(int i=3;i<14;i+=2){
+    digitalWrite(i,HIGH);
   }
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  if (on){
-    for(int i=2;i<10;i++){
-      digitalWrite(i, HIGH);
-      if(i==filablanca1 || i==filablanca2 || i==filanegra1 || i==filanegra2){
-        continue;
-      }
+  for(int i=2;i<13;i+=2){
+    for(int j=3;j<14;j+=2){
+      digitalWrite(i,HIGH);
+      digitalWrite(j,LOW);
       delay(delay_time);
-      digitalWrite(i, LOW);
-      delay(delay_time);
-    }
-    delay(delay_time);
 
-    for(int i=2;i<10;i++){
-      if(i==filablanca1 || i==filablanca2 || i==filanegra1 || i==filanegra2){
-        digitalWrite(i, LOW);
-      }
+
+      digitalWrite(i,LOW);
+      digitalWrite(j,HIGH);
     }
-    delay(delay_time);
+
   }
 }
