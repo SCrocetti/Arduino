@@ -6,7 +6,9 @@ const int num_puertos = sizeof(puertosDisponibles) / sizeof(puertosDisponibles[0
 
 const int num_filaXcolumna = num_puertos / 2;
 
+//filas positivas
 int puertosFilas[num_filaXcolumna];
+//columnas negativas
 int puertosColumnas[num_filaXcolumna];
 
 void setup() {
@@ -42,6 +44,7 @@ void configurarPuertos() {
 
 void apagarPuertos() {
   for (int i = 0; i < num_puertos; i++) {
-    digitalWrite(puertosDisponibles[i], LOW);
+    digitalWrite(puertosFilas[i], LOW);
+    digitalWrite(puertosColumnas[i], HIGH);
   }
 }
