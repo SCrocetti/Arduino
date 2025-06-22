@@ -5,6 +5,8 @@ Welcome to the **Arduino** repository! This repository is intended to host vario
 ## 🔧 Projects
 
 1. 01-Blinking led and button
+2. 02-Relay, LEDs, and Tactile Switch
+3. 03-Led matrix
 4. 04-Conmuting leds experiments
 
 ## 📁 Structure
