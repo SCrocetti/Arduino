@@ -7,7 +7,19 @@ The purpose of this project is to make an 8x8 LED matrix sweep its leds forming 
 
 ## Overview
 
-In this project, we'll control a subset of an 8x8 LED matrix using an Arduino UNO. We'll activate the leds one row at the time making a sweep to give the ilusion of a fix image. Only the inner 6×6 area of the matrix (rows 2–7, columns 2–7) is used.
+In this project, we'll develop an Arduino library to control a subset of an 8×8 LED matrix. The library will support displaying a static image or sweeping through a sequence of images to create animation effects.
+
+Only the inner 6×6 area of the matrix (rows 2–7, columns 2–7) is used, leaving the outermost rows and columns unused. The LED matrix will be driven using a row-at-a-time sweep technique, creating the illusion of a stable image by rapidly refreshing each row in succession.
+
+The library will provide functions to:
+
+    Display a single image on the 6×6 area.
+
+    Sweep through a list of images with configurable frame delays and durations.
+
+    Abstract away low-level pin control and timing logic for easy reuse.
+
+This approach allows for modular and efficient control of 2D LED patterns, ideal for projects involving simple graphics or animated icons.
 
 ---
 
