@@ -1,12 +1,6 @@
-# 03 - LED Matrix Sweep
+# 05 - LED Matrix Sweep
 
-Welcome to the **03 - LED Matrix Sweep** project!  
-The purpose of this project is to make an 8x8 LED matrix sweep its leds forming an image represented as a boolean array starting from the LED at **row 2, column 2** and ending at **row 7, column 7**.
-
----
-
-## Overview
-
+Welcome to the **05 - LED Matrix Sweep** project! 
 In this project, we'll develop an Arduino library to control a subset of an 8×8 LED matrix. The library will support displaying a static image or sweeping through a sequence of images to create animation effects.
 
 Only the inner 6×6 area of the matrix (rows 2–7, columns 2–7) is used, leaving the outermost rows and columns unused. The LED matrix will be driven using a row-at-a-time sweep technique, creating the illusion of a stable image by rapidly refreshing each row in succession.
