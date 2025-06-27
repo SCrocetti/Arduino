@@ -13,11 +13,9 @@ Only the inner 6×6 area of the matrix (rows 2–7, columns 2–7) is used, leav
 
 The library will provide functions to:
 
-    Display a single image on the 6×6 area.
-
-    Sweep through a list of images with configurable frame delays and durations.
-
-    Abstract away low-level pin control and timing logic for easy reuse.
+- Display a single image on the 6×6 area.
+- Sweep through a list of images with configurable frame delays and durations.
+- Abstract away low-level pin control and timing logic for easy reuse.
 
 This approach allows for modular and efficient control of 2D LED patterns, ideal for projects involving simple graphics or animated icons.
 
