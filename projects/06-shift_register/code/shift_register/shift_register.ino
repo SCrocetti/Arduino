@@ -1,28 +1,26 @@
-const int botonPin = 3;
-const int ledPin = 10;
-int estadoBoton = 0;
-bool system_on=false;
+const int dataPin  = 11; // SER
+const int clockPin = 13; // SRCLK
+const int latchPin = 8;  // RCLK
+const byte patterns[] = {
+  0b10101010, // alternating
+  0b01010101,
+  0b11110000, // nibble flash
+  0b00001111,
+  0b10000001, // edges
+  0b01111110  // center bar
+};
 void setup() {
-  pinMode(botonPin, INPUT);
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600);
+  pinMode(dataPin,  OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(latchPin, OUTPUT);
 }
 
 void loop() {
-  estadoBoton = digitalRead(botonPin);
-  delay(500);
-  if (estadoBoton == HIGH) {
-    Serial.println("Botón presionado");
-    system_on=!system_on;
-  } else {
-    Serial.println("Botón liberado");
-  }
-  if(system_on){
-    digitalWrite(ledPin, HIGH);
-    delay(500);
-    digitalWrite(ledPin, LOW);
-  }
-  else{
-    digitalWrite(ledPin, LOW);
+
+  for (byte i = 0; i < sizeof(patterns); ++i) {
+    digitalWrite(latchPin, LOW);
+    shiftOut(dataPin, clockPin, MSBFIRST, patterns[i]);
+    digitalWrite(latchPin, HIGH);
+    delay(300);
   }
 }
