@@ -2,12 +2,14 @@ const int dataPin  = 11; // SER
 const int clockPin = 13; // SRCLK
 const int latchPin = 8;  // RCLK
 const byte patterns[] = {
-  0b10101010, // alternating
-  0b01010101,
-  0b11110000, // nibble flash
-  0b00001111,
-  0b10000001, // edges
-  0b01111110  // center bar
+  0b10000000, // 
+  0b01000000,
+  0b00100000, // 
+  0b00010000,
+  0b00001000, // 
+  0b00000100,  //
+  0b00000010,  //
+  0b00000001  //
 };
 void setup() {
   pinMode(dataPin,  OUTPUT);
@@ -16,11 +18,10 @@ void setup() {
 }
 
 void loop() {
-
   for (byte i = 0; i < sizeof(patterns); ++i) {
     digitalWrite(latchPin, LOW);
     shiftOut(dataPin, clockPin, MSBFIRST, patterns[i]);
     digitalWrite(latchPin, HIGH);
-    delay(300);
+    delay(1000);
   }
 }
