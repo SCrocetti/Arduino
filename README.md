@@ -23,3 +23,4 @@ ProjectName/
 - 04-Conmuting leds experiments
 - 05-Led matrix sweep
 - 06-Shift register
+- 07-Led matrix and shift register
