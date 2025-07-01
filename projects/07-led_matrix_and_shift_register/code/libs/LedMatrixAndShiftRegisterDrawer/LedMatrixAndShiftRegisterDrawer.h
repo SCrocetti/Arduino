@@ -13,10 +13,10 @@ static const uint8_t LEDMATRIX_PINOUT[6][6][2] = {
 };
 #endif
 
-class LedMatrixDrawer {
+class LedMatrixAndShiftRegisterDrawer {
 public:
   /* NOTE the parameter and member type: pointer to [6][6][2] */
-  explicit LedMatrixDrawer(const uint8_t  pins [6][6][2] = LEDMATRIX_PINOUT);
+  explicit LedMatrixAndShiftRegisterDrawer(const uint8_t  pins [6][6][2] = LEDMATRIX_PINOUT);
 
   void sweepMatrix(const bool frame[6][6], uint16_t durationMs);
   void sweepArray(const bool *const frames[], uint8_t frame_count,

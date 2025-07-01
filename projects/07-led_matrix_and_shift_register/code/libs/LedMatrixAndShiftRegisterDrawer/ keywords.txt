@@ -1,5 +1,4 @@
 sweepMatrix      KEYWORD2
 sweepArray       KEYWORD2
-LedMatrixDrawer  KEYWORD1
-transition_matrix LITERAL1
+LedMatrixAndShiftRegisterDrawer  KEYWORD1
 delay_time       LITERAL1

@@ -1,6 +1,6 @@
 #include "LedMatrixDrawer.h"
 
-LedMatrixDrawer::LedMatrixDrawer(const uint8_t pins[6][6][2])
+LedMatrixAndShiftRegisterDrawer::LedMatrixAndShiftRegisterDrawer(const uint8_t pins[6][6][2])
 {
   memcpy(_pins, pins, sizeof _pins);
   for (uint8_t i=0;i<6;i++){
@@ -12,7 +12,7 @@ LedMatrixDrawer::LedMatrixDrawer(const uint8_t pins[6][6][2])
   }
 }
 
-void LedMatrixDrawer::sweepMatrix(const bool frame[6][6],
+void LedMatrixAndShiftRegisterDrawer::sweepMatrix(const bool frame[6][6],
                                   uint16_t durationMs)
 {
   const float frequency = 3.5f;
@@ -42,7 +42,7 @@ void LedMatrixDrawer::sweepMatrix(const bool frame[6][6],
     }
   }
 }
-void LedMatrixDrawer::sweepArray(const bool *const frames[], uint8_t frame_count,
+void LedMatrixAndShiftRegisterDrawer::sweepArray(const bool *const frames[], uint8_t frame_count,
                                  uint16_t frameDurationMs, uint16_t frameDelay) {
   for (uint8_t i = 0; i < frame_count; ++i) {
     const bool (*frame)[6] = reinterpret_cast<const bool (*)[6]>(frames[i]);
