@@ -1,6 +1,6 @@
 # 06-Shift register
 
-Welcome to the **06-Shift register** project! The goal of this mini-lab is to learn how to send serial data to a **74HC595** shift register from an Arduino and visualize each transmitted byte by turning eight LEDs on or off.
+Welcome to the **06-Shift register** project! The goal of this mini-lab is to create an Arduino library to send serial data to a **74HC595** shift register and visualize each transmitted byte by turning eight LEDs on or off.
 
 ## Overview
 A shift register is an integrated circuit that converts serial data (one bit at a time) into parallel outputs (all eight bits at once). By cascading shift registers you can drive dozens of outputs while using only three GPIO pins on the Arduino.
