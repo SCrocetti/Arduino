@@ -1,7 +1,5 @@
 #include <ShiftRegisterWriter.h>
 
-#include <ShiftRegisterWriter.h>
-
 // Shift‑register pins
 const uint8_t DATA_PIN  = 11;
 const uint8_t CLOCK_PIN = 13;
