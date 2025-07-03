@@ -86,18 +86,20 @@ void drawAnimation(uint8_t const* const animation[],uint8_t patternCount,){
   }
 }
 // Show a sequence of 8×8 frames with optional per‑frame flipping.
-//  animation    : array of pointers to 8‑row patterns (PROGMEM or RAM)
-//  flipPattern  : array of booleans; true  ➜ show frame flipped
-//  patternCount : number of frames in the animation
+//  animation     : array of pointers to 8‑row patterns (PROGMEM or RAM)
+//  flipPattern   : array of booleans; true ➜ show frame flipped
+//  patternCount  : number of frames in the animation
+//  frameTimeMs   : how long to keep each frame on screen
 void drawAnimation(const uint8_t* const animation[],
-                   const bool          flipPattern[],
-                   uint8_t             patternCount)
+                   const bool           flipPattern[],
+                   uint8_t              patternCount,
+                   uint16_t             frameTimeMs)
 {
     for (uint8_t frame = 0; frame < patternCount; ++frame)
     {
         bool flip = flipPattern[frame];          // per‑frame flag
         drawPattern(animation[frame], flip);     // render one frame
-        delay(500);                              // hold 500 ms
+        delay(frameTimeMs);                      // hold for given time
     }
 }
 void setup() {
