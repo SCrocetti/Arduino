@@ -1,81 +1,115 @@
-#include <LedMatrixDrawer.h>
-#include <LedMatrixDrawerConfig.h>
+#include <Arduino.h>
+#include <avr/pgmspace.h>
+#include "ShiftRegisterWriter.h"
 
-bool m_matrix[6][6]={
-  {true,false,false,false,false,true},
-  {true,true,false,false,true,true},
-  {true,false,true,true,false,true},
-  {true,false,true,true,false,true},
-  {true,false,false,false,false,true},
-  {true,false,false,false,false,true}
+// === CONFIG ===
+constexpr bool COL_ACTIVE_LOW = true;    // columns active LOW (invert bits)
+constexpr uint8_t DATA_PIN  = 11;        // 74HC595 SER
+constexpr uint8_t CLOCK_PIN = 13;        // 74HC595 SRCLK
+constexpr uint8_t LATCH_PIN = 10;        // 74HC595 RCLK
+constexpr uint8_t ROW_PINS[8] = {2, 3, 4, 5, 6, 7, 8, 9}; // Matrix rows
+
+// Columns reset pattern (all off)
+constexpr uint8_t COLUMNS_RESETED = COL_ACTIVE_LOW ? 0xFF : 0x00;
+
+// Create ShiftRegisterWriter instance with default MSBFIRST (ignored if you use dynamic write)
+ShiftRegisterWriter registerWriter(DATA_PIN, CLOCK_PIN, LATCH_PIN, MSBFIRST);
+
+// === PROGMEM patterns for letters M, I, A, U ===
+constexpr uint8_t patternM[8] PROGMEM = {
+  0b10000001, 0b11000011, 0b10100101, 0b10011001,
+  0b10000001, 0b10000001, 0b10000001, 0b00000000
+};
+constexpr uint8_t patternI[8] PROGMEM = {
+  0b11111111, 0b00011000, 0b00011000, 0b00011000,
+  0b00011000, 0b00011000, 0b00011000, 0b11111111
+};
+constexpr uint8_t patternA[8] PROGMEM = {
+  0b00111100, 0b01000010, 0b10000001, 0b10000001,
+  0b11111111, 0b10000001, 0b10000001, 0b10000001
+};
+constexpr uint8_t patternU[8] PROGMEM = {
+  0b10000001, 0b10000001, 0b10000001, 0b10000001,
+  0b10000001, 0b10000001, 0b10000001, 0b01111110
 };
 
-bool i_matrix[6][6]={
-  {false,true,true,true,true,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,true,true,true,true,false}
-};
+const bool flipFlags[] = { false, true, false, true };  // M I A U mirrored alternately
 
-bool a_matrix[6][6]={
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true}
-  
-};
+uint8_t const* const animation[] = { patternM, patternI, patternA, patternU };
+constexpr size_t patternCount = sizeof(animation) / sizeof(*animation);
 
-bool u_matrix[6][6]={
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,true,true,true,true}
-};
+// === Helper: read byte from PROGMEM or RAM ===
+static inline uint8_t readByte(const uint8_t* addr) {
+#ifdef __AVR__
+  return pgm_read_byte(addr);
+#else
+  return *addr;
+#endif
+}
 
-bool o_matrix[6][6]={
-  {false,true,true,true,true,false},
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {false,true,true,true,true,false}
-};
+// === Helper: bit-reverse an 8-bit byte ===
+static inline uint8_t reverse8(uint8_t b) {
+  b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+  b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+  b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+  return b;
+}
 
-bool r_matrix[6][6]={
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,false,true,true,false},
-  {true,true,false,false,true,true}
-};
+// === Draw a pattern with optional bit order flip ===
+void drawPattern(const uint8_t* patternPtr, bool flipBits)
+{
+  uint8_t bitOrder = flipBits ? LSBFIRST : MSBFIRST;
 
-LedMatrixDrawer drawer;
+  for (uint8_t row = 0; row < 8; ++row)
+  {
+    uint8_t bits = readByte(patternPtr + row);
+    if (!bits) continue;
 
-const bool* const animation[] = {
-  &m_matrix[0][0],
-  &i_matrix[0][0],
-  &a_matrix[0][0],
-  &u_matrix[0][0],
-  &m_matrix[0][0],
-  &o_matrix[0][0],
-  &r_matrix[0][0]
-};
+    uint8_t colData = COL_ACTIVE_LOW ? ~bits : bits;
+    if (flipBits) colData = reverse8(colData);
 
+    digitalWrite(ROW_PINS[row], HIGH);
+    registerWriter.write(colData, bitOrder);
+    registerWriter.write(COLUMNS_RESETED, bitOrder);
+    digitalWrite(ROW_PINS[row], LOW);
+  }
+}
 
-int numBitmaps;
+void drawAnimation(uint8_t const* const animation[],uint8_t patternCount,){
+  for(uint8_t frame=0;frame<patternCount;frame++){
+    static bool flip = false;
+
+    drawPattern(animation[frame], flip);
+    delay(500);
+
+    flip = !flip;  
+  }
+}
+// Show a sequence of 8×8 frames with optional per‑frame flipping.
+//  animation    : array of pointers to 8‑row patterns (PROGMEM or RAM)
+//  flipPattern  : array of booleans; true  ➜ show frame flipped
+//  patternCount : number of frames in the animation
+void drawAnimation(const uint8_t* const animation[],
+                   const bool          flipPattern[],
+                   uint8_t             patternCount)
+{
+    for (uint8_t frame = 0; frame < patternCount; ++frame)
+    {
+        bool flip = flipPattern[frame];          // per‑frame flag
+        drawPattern(animation[frame], flip);     // render one frame
+        delay(500);                              // hold 500 ms
+    }
+}
 void setup() {
-  numBitmaps = sizeof(animation) / sizeof(animation[0]);
+  for (uint8_t pin : ROW_PINS) {
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, LOW);
+  }
+  registerWriter.begin();
 }
 
 void loop() {
-  drawer.sweepArray(animation,numBitmaps,1500,250);
-  delay(1000);
+    drawAnimation(patternPointers, flipFlags,
+                  sizeof(patternPointers) / sizeof(*patternPointers));
 }
 
