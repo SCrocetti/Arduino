@@ -1,25 +1,43 @@
+#include <ShiftRegisterWriter.h>
+
 #include <Arduino.h>
 #include <avr/pgmspace.h>
 #include "ShiftRegisterWriter.h"
 
 // === CONFIG ===
-constexpr uint8_t DATA_PIN  = 11;        // 74HC595 SER
-constexpr uint8_t CLOCK_PIN = 13;        // 74HC595 SRCLK
-constexpr uint8_t LATCH_PIN = 10;        // 74HC595 RCLK
+const bool SYSTEM_ON=true;
+constexpr uint8_t DATA_PIN  = 10;        // 74HC595 SER
+constexpr uint8_t CLOCK_PIN = 12;        // 74HC595 SRCLK
+constexpr uint8_t LATCH_PIN = 11;        // 74HC595 RCLK
 constexpr uint8_t ROW_PINS[8] = {2, 3, 4, 5, 6, 7, 8, 9}; // Matrix rows
 
 // Columns reset pattern (all off)
-constexpr uint8_t COLUMNS_RESETED = 0xFF;
+constexpr uint8_t COLUMNS_RESETED = 0b11111111;
 
 // Create ShiftRegisterWriter instance with default MSBFIRST (ignored if you use dynamic write)
 ShiftRegisterWriter registerWriter(DATA_PIN, CLOCK_PIN, LATCH_PIN, MSBFIRST);
-
-// === PROGMEM patterns for letters M, I, A, U ===
-constexpr uint8_t patternM[8] PROGMEM = {
-  0b10000001, 0b11000011, 0b10100101, 0b10011001,
-  0b10000001, 0b10000001, 0b10000001, 0b00000000
+constexpr uint8_t patternM_inv[8] PROGMEM= {
+  0b01111110,   // ~0b10000001
+  0b00111100,   // ~0b11000011
+  0b01011010,   // ~0b10100101
+  0b01100110,   // ~0b10011001
+  0b01111110,   // ~0b10000001
+  0b01111110,   // ~0b10000001
+  0b01111110,   // ~0b10000001
+  0b01111110    // ~0b00000000
 };
-constexpr uint8_t patternI[8] PROGMEM = {
+// === PROGMEM patterns for letters M, I, A, U ===
+constexpr uint8_t patternM[8] = {
+  0b10000001, 
+  0b11000011,
+  0b10100101,
+  0b10011001,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b10000001
+};
+constexpr uint8_t patternI[8] = {
   0b11111111, 0b00011000, 0b00011000, 0b00011000,
   0b00011000, 0b00011000, 0b00011000, 0b11111111
 };
@@ -55,34 +73,29 @@ static inline uint8_t reverse8(uint8_t b) {
 }
 
 // === Draw a pattern with optional bit order flip ===
-void drawPattern(const uint8_t* patternPtr, bool flipBits)
+void drawPattern(const uint8_t* patternPtr, bool flipBits, const uint8_t frames)
 {
   uint8_t bitOrder = flipBits ? LSBFIRST : MSBFIRST;
 
-  for (uint8_t row = 0; row < 8; ++row)
-  {
-    uint8_t bits = readByte(patternPtr + row);
-    if (!bits) continue;
+  for(uint8_t frame=0;frame<frames;frame++){
+    for (uint8_t row = 0; row < 8; ++row)
+    {
+      uint8_t bits = readByte(patternPtr+row);
 
-    colData = reverse8(colData);
-
-    digitalWrite(ROW_PINS[row], HIGH);
-    registerWriter.write(colData, bitOrder);
-    registerWriter.write(COLUMNS_RESETED, bitOrder);
-    digitalWrite(ROW_PINS[row], LOW);
+      digitalWrite(ROW_PINS[row], HIGH);
+      writeRegister(bits, bitOrder);
+      digitalWrite(ROW_PINS[row], LOW);
+    }
   }
 }
-
-void drawAnimation(uint8_t const* const animation[],uint8_t patternCount,){
-  for(uint8_t frame=0;frame<patternCount;frame++){
-    static bool flip = false;
-
-    drawPattern(animation[frame], flip);
-    delay(500);
-
-    flip = !flip;  
-  }
+void writeRegister(uint8_t value, uint8_t bitOrder)
+{ 
+    digitalWrite(LATCH_PIN, LOW);
+    shiftOut(DATA_PIN, CLOCK_PIN, bitOrder, value);
+    digitalWrite(LATCH_PIN, HIGH);
 }
+
+/*
 // Show a sequence of 8×8 frames with optional per‑frame flipping.
 //  animation     : array of pointers to 8‑row patterns (PROGMEM or RAM)
 //  flipPattern   : array of booleans; true ➜ show frame flipped
@@ -100,16 +113,39 @@ void drawAnimation(const uint8_t* const animation[],
         delay(frameTimeMs);                      // hold for given time
     }
 }
+*/
 void setup() {
-  for (uint8_t pin : ROW_PINS) {
-    pinMode(pin, OUTPUT);
-    digitalWrite(pin, LOW);
+  if(SYSTEM_ON){
+    Serial.begin(9600); 
+    for(uint8_t row=0;row<8;row++){
+        pinMode(ROW_PINS[row], OUTPUT);
+      }
+    registerWriter.begin();
+    registerWriter.write(COLUMNS_RESETED, MSBFIRST);
   }
-  registerWriter.begin();
 }
 
 void loop() {
-    drawAnimation(patternPointers, flipFlags,
-                  sizeof(patternPointers) / sizeof(*patternPointers));
+  if(SYSTEM_ON){
+    drawPattern(patternM_inv,false,3000);
+      
+  }
 }
+/*
+void loop() {
+  if(SYSTEM_ON){
 
+      //bits = reverse8(bits);
+      registerWriter.write(0b00000000, MSBFIRST);
+      for(uint8_t row=0;row<8;row++){
+        digitalWrite(ROW_PINS[row], HIGH);
+        delay(500);
+      }
+      for(uint8_t row=0;row<8;row++){
+        digitalWrite(ROW_PINS[row], LOW);
+        delay(500);
+      }
+      registerWriter.write(0b11111111, MSBFIRST);
+  }
+}
+*/
