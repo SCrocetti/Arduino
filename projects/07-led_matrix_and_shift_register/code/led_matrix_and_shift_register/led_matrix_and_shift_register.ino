@@ -108,18 +108,34 @@ static inline uint8_t readByte(const uint8_t* addr) {
   return *addr;
 #endif
 }
+/**
+ * Draws a static 8x8 pattern for the specified duration in milliseconds.
+ *
+ * @param patternPtr Pointer to the 8-byte pattern array.
+ * @param durationMs Duration to display the pattern in milliseconds.
+ */
+void drawPattern(const uint8_t* patternPtr, unsigned long durationMs){
+  drawPattern(patternPtr, false, durationMs);
+}
 
-// === Draw a pattern with optional bit order flip ===
+/**
+ * Draws a static 8x8 pattern for the specified duration in milliseconds,
+ * with optional horizontal bit-flipping.
+ *
+ * @param patternPtr Pointer to the 8-byte pattern array.
+ * @param flipBits If true, bits will be flipped before display.
+ * @param durationMs Duration to display the pattern in milliseconds.
+ */
 void drawPattern(const uint8_t* patternPtr, bool flipBits, unsigned long durationMs)
 {
-  const unsigned long FRAME_US = 973UL; // time per frame in micros
-  unsigned long frames = durationMs*1000 / FRAME_US;
+  const unsigned long FRAME_US = 973UL; // time per frame in microseconds
+  unsigned long frames = durationMs * 1000 / FRAME_US;
   uint8_t bitOrder = flipBits ? MSBFIRST : LSBFIRST;
 
-  for(unsigned long frame=0;frame<frames;frame++){
+  for (unsigned long frame = 0; frame < frames; frame++) {
     for (uint8_t row = 0; row < 8; ++row)
     {
-      uint8_t bits = ~readByte(patternPtr+row);
+      uint8_t bits = ~readByte(patternPtr + row);
 
       digitalWrite(ROW_PINS[row], HIGH);
       registerWriter.write(bits, bitOrder);
@@ -129,11 +145,14 @@ void drawPattern(const uint8_t* patternPtr, bool flipBits, unsigned long duratio
   }
 }
 
-// Show a sequence of 8×8 frames with optional per‑frame flipping.
-//  animation     : array of pointers to 8‑row patterns (PROGMEM or RAM)
-//  flipPattern   : array of booleans; true ➜ show frame flipped
-//  patternCount  : number of frames in the animation
-//  frameTimeMs   : how long to keep each frame on screen
+/**
+ * Plays an animation consisting of multiple 8x8 patterns with optional per-frame flipping.
+ *
+ * @param animation Array of pointers to 8-row patterns (PROGMEM or RAM).
+ * @param flipPattern Array of booleans; true ➜ show frame flipped.
+ * @param patternCount Number of frames in the animation.
+ * @param frameTimeMs How long (in milliseconds) to show each frame.
+ */
 void drawAnimation(const uint8_t* const animation[],
                    const bool           flipPattern[],
                    uint8_t              patternCount,
@@ -141,10 +160,28 @@ void drawAnimation(const uint8_t* const animation[],
 {
     for (uint8_t pattern = 0; pattern < patternCount; ++pattern)
     {
-        bool flip = flipPattern[pattern];          // per‑frame flag
-        drawPattern(animation[pattern], flip,frameTimeMs);     // render one frame
+        bool flip = flipPattern[pattern];                // per-frame flag
+        drawPattern(animation[pattern], flip, frameTimeMs); // render one frame
     }
 }
+
+/**
+ * Plays an animation consisting of multiple 8x8 patterns without flipping.
+ *
+ * @param animation Array of pointers to 8-row patterns (PROGMEM or RAM).
+ * @param patternCount Number of frames in the animation.
+ * @param frameTimeMs How long (in milliseconds) to show each frame.
+ */
+void drawAnimation(const uint8_t* const animation[],
+                   uint8_t              patternCount,
+                   uint16_t             frameTimeMs)
+{
+    for (uint8_t pattern = 0; pattern < patternCount; ++pattern)
+    {
+        drawPattern(animation[pattern], frameTimeMs); // render one frame
+    }
+}
+
 void setup() {
   if(SYSTEM_ON){
     Serial.begin(9600); 
@@ -158,7 +195,7 @@ void setup() {
 
 void loop() {
   if(SYSTEM_ON){
-    drawAnimation(animation,flipFlags,patternCount,700);
+    drawAnimation(animation,patternCount,700);
       
   }
 }
