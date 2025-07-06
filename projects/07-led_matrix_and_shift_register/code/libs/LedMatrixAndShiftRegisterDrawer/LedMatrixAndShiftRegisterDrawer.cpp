@@ -1,53 +1,75 @@
-#include "LedMatrixDrawer.h"
+#include <ShiftRegisterWriter.h>
+#include <LedMatrixAndShiftRegisterDrawer.h>
+#include <Arduino.h>
+#include <avr/pgmspace.h>
 
-LedMatrixAndShiftRegisterDrawer::LedMatrixAndShiftRegisterDrawer(const uint8_t pins[6][6][2])
+/* ------------------------------------------------------------------ */
+/* Constructor                                                        */
+/* ------------------------------------------------------------------ */
+LedMatrixAndShiftRegisterDrawer::LedMatrixAndShiftRegisterDrawer(
+        const uint8_t rowPins[8],
+        uint8_t dataPin,
+        uint8_t clockPin,
+        uint8_t latchPin)
+    : _rowPins{},                                        // zero‑initialise the array
+      _registerWriter(dataPin, clockPin, latchPin, MSBFIRST)   // construct properly
 {
-  memcpy(_pins, pins, sizeof _pins);
-  for (uint8_t i=0;i<6;i++){
-      uint8_t rowPin = _pins[i][0][0];   // [row][col=0][cat/an=0]
-      uint8_t colPin = _pins[0][i][1];   // [row][col=0][cat/an=0]
-      pinMode(rowPin, OUTPUT);
-      pinMode(colPin, OUTPUT);
-      digitalWrite(colPin, HIGH);
-  }
+    // copy the caller’s row pin array
+    memcpy(_rowPins, rowPins, 8);
 }
 
-void LedMatrixAndShiftRegisterDrawer::sweepMatrix(const bool frame[6][6],
-                                  uint16_t durationMs)
+/* ------------------------------------------------------------------ */
+/* Public methods                                                     */
+/* ------------------------------------------------------------------ */
+
+void LedMatrixAndShiftRegisterDrawer::begin(){
+  for(uint8_t row=0;row<8;row++){
+        pinMode(_rowPins[row], OUTPUT);
+      }
+    _registerWriter.begin();
+    _registerWriter.write(COLUMNS_RESETED, MSBFIRST);
+}
+void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr, unsigned long durationMs){
+  drawPattern(patternPtr, false, durationMs);
+}
+
+
+void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr, bool flipBits, unsigned long durationMs)
 {
-  const float frequency = 3.5f;
-  const int   sweeps    = (int)(frequency * durationMs);
+  const unsigned long FRAME_US = 973UL; // time per frame in microseconds
+  unsigned long frames = durationMs * 1000 / FRAME_US;
+  uint8_t bitOrder = flipBits ? MSBFIRST : LSBFIRST;
 
-  for (int k = 0; k < sweeps; ++k) {
-    for (int row = 0; row < 6; ++row) {
+  for (unsigned long frame = 0; frame < frames; frame++) {
+    for (uint8_t row = 0; row < 8; ++row)
+    {
+      uint8_t bits = ~pgm_read_byte(patternPtr + row);
 
-      uint8_t rowPin = _pins[row][0][0];   // [row][col=0][cat/an=0]
-      digitalWrite(rowPin, HIGH);
-
-      for (int col = 0; col < 6; ++col) {
-        if (frame[row][col]) {
-          uint8_t colPin = _pins[row][col][1]; // cat/an index 1
-          digitalWrite(colPin, LOW);
-        }
-      }
-
-      for (int col = 0; col < 6; ++col) {
-        if (frame[row][col]) {
-          uint8_t colPin = _pins[row][col][1];
-          digitalWrite(colPin, HIGH);
-        }
-      }
-
-      digitalWrite(rowPin, LOW);
+      digitalWrite(_rowPins[row], HIGH);
+      _registerWriter.write(bits, bitOrder);
+      _registerWriter.write(COLUMNS_RESETED, MSBFIRST);
+      digitalWrite(_rowPins[row], LOW);
     }
   }
 }
-void LedMatrixAndShiftRegisterDrawer::sweepArray(const bool *const frames[], uint8_t frame_count,
-                                 uint16_t frameDurationMs, uint16_t frameDelay) {
-  for (uint8_t i = 0; i < frame_count; ++i) {
-    const bool (*frame)[6] = reinterpret_cast<const bool (*)[6]>(frames[i]);
-    sweepMatrix(frame, frameDurationMs);
-    delay(frameDelay);
-  }
+
+void LedMatrixAndShiftRegisterDrawer::drawAnimation(const uint8_t* const animation[],
+                   const bool           flipPattern[],
+                   uint8_t              patternCount,
+                   uint16_t             frameTimeMs)
+{
+    for (uint8_t pattern = 0; pattern < patternCount; ++pattern)
+    {
+        drawPattern(animation[pattern], flipPattern[pattern], frameTimeMs); // render one frame
+    }
 }
 
+void LedMatrixAndShiftRegisterDrawer::drawAnimation(const uint8_t* const animation[],
+                   uint8_t              patternCount,
+                   uint16_t             frameTimeMs)
+{
+    for (uint8_t pattern = 0; pattern < patternCount; ++pattern)
+    {
+        drawPattern(animation[pattern], frameTimeMs); // render one frame
+    }
+}

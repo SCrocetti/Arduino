@@ -1,81 +1,59 @@
-#include <LedMatrixDrawer.h>
-#include <LedMatrixDrawerConfig.h>
+#include <LedMatrixAndShiftRegisterDrawer.h>
+#include <Arduino.h>
+#include <avr/pgmspace.h>
 
-bool m_matrix[6][6]={
-  {true,false,false,false,false,true},
-  {true,true,false,false,true,true},
-  {true,false,true,true,false,true},
-  {true,false,true,true,false,true},
-  {true,false,false,false,false,true},
-  {true,false,false,false,false,true}
+// === CONFIG ===
+constexpr uint8_t DATA_PIN  = 10;        // 74HC595 SER
+constexpr uint8_t CLOCK_PIN = 12;        // 74HC595 SRCLK
+constexpr uint8_t LATCH_PIN = 11;        // 74HC595 RCLK
+constexpr uint8_t ROW_PINS[8] = {2, 3, 4, 5, 6, 7, 8, 9}; // Matrix rows
+
+LedMatrixAndShiftRegisterDrawer drawer(ROW_PINS,DATA_PIN, CLOCK_PIN, LATCH_PIN);
+constexpr uint8_t patternM[8] PROGMEM = {
+  0b10000001, 
+  0b11000011,
+  0b10100101,
+  0b10011001,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b10000001
 };
-
-bool i_matrix[6][6]={
-  {false,true,true,true,true,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,true,true,true,true,false}
+constexpr uint8_t patternI[8] PROGMEM= {
+  0b11111111, 0b00011000, 0b00011000, 0b00011000,
+  0b00011000, 0b00011000, 0b00011000, 0b11111111
 };
-
-bool a_matrix[6][6]={
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true}
-  
+constexpr uint8_t patternA[8] PROGMEM = {
+  0b00111100, 0b01000010, 0b10000001, 0b10000001,
+  0b11111111, 0b10000001, 0b10000001, 0b10000001
 };
-
-bool u_matrix[6][6]={
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,true,true,true,true}
+constexpr uint8_t patternU[8] PROGMEM = {
+  0b10000001, 0b10000001, 0b10000001, 0b10000001,
+  0b10000001, 0b10000001, 0b10000001, 0b01111110
 };
-
-bool o_matrix[6][6]={
-  {false,true,true,true,true,false},
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {false,true,true,true,true,false}
+constexpr uint8_t patternO[8] PROGMEM = {
+  0b01111110, 0b10000001, 0b10000001, 0b10000001,
+  0b10000001, 0b10000001, 0b10000001, 0b01111110
 };
-
-bool r_matrix[6][6]={
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,false,true,true,false},
-  {true,true,false,false,true,true}
+constexpr uint8_t patternR[8] PROGMEM = {
+  0b11111110,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b11111110,
+  0b10010000,
+  0b10001000,
+  0b10000100
 };
+const bool flipFlags[] = { false, false, false, false, false, false,false };  // M I A U mirrored alternately
 
-LedMatrixDrawer drawer;
+uint8_t const* const animation[] = { patternM, patternI, patternA, patternU, patternM, patternO, patternR };
+constexpr size_t patternCount = sizeof(animation) / sizeof(*animation);
 
-const bool* const animation[] = {
-  &m_matrix[0][0],
-  &i_matrix[0][0],
-  &a_matrix[0][0],
-  &u_matrix[0][0],
-  &m_matrix[0][0],
-  &o_matrix[0][0],
-  &r_matrix[0][0]
-};
-
-
-int numBitmaps;
 void setup() {
-  numBitmaps = sizeof(animation) / sizeof(animation[0]);
+  drawer.begin();
 }
 
 void loop() {
-  drawer.sweepArray(animation,numBitmaps,1500,250);
-  delay(1000);
+  drawer.drawAnimation(animation,patternCount,700);
 }
-

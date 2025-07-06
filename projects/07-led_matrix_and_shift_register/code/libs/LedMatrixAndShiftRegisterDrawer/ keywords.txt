@@ -1,4 +1,3 @@
-sweepMatrix      KEYWORD2
-sweepArray       KEYWORD2
+drawPattern      KEYWORD2
+drawAnimation       KEYWORD2
 LedMatrixAndShiftRegisterDrawer  KEYWORD1
-delay_time       LITERAL1

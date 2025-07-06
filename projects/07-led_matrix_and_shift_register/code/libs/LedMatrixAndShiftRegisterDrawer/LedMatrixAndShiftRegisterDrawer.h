@@ -1,28 +1,62 @@
 #pragma once
+#include <ShiftRegisterWriter.h>
 #include <Arduino.h>
 
-/* If the sketch didn’t #define LEDMATRIX_PINOUT, fall back to this */
-#ifndef LEDMATRIX_PINOUT
-static const uint8_t LEDMATRIX_PINOUT[6][6][2] = {
-  {{ 2,  3},{ 2,  5},{ 2,  7},{ 2,  9},{ 2, 11},{ 2, 13}},
-  {{ 4,  3},{ 4,  5},{ 4,  7},{ 4,  9},{ 4, 11},{ 4, 13}},
-  {{ 6,  3},{ 6,  5},{ 6,  7},{ 6,  9},{ 6, 11},{ 6, 13}},
-  {{ 8,  3},{ 8,  5},{ 8,  7},{ 8,  9},{ 8, 11},{ 8, 13}},
-  {{10,  3},{10,  5},{10,  7},{10,  9},{10, 11},{10, 13}},
-  {{12,  3},{12,  5},{12,  7},{12,  9},{12, 11},{12, 13}}
-};
-#endif
 
 class LedMatrixAndShiftRegisterDrawer {
 public:
-  /* NOTE the parameter and member type: pointer to [6][6][2] */
-  explicit LedMatrixAndShiftRegisterDrawer(const uint8_t  pins [6][6][2] = LEDMATRIX_PINOUT);
+  /**
+  * @brief Construct a drawer for the led matrix using a shift register
+  *
+  * @param rowPins         Pinout of the rows of the led matrix
+  * @param dataPin         MCU pin wired to SER (DS) of the shift register.
+  * @param clockPin        MCU pin wired to SRCLK  of the shift register.
+  * @param latchPin        MCU pin wired to RCLK  of the shift register.
+  */
+  LedMatrixAndShiftRegisterDrawer(const uint8_t  rowPins[8],
+                                            uint8_t dataPin,
+                                            uint8_t clockPin,
+                                            uint8_t latchPin);
 
-  void sweepMatrix(const bool frame[6][6], uint16_t durationMs);
-  void sweepArray(const bool *const frames[], uint8_t frame_count,
-                uint16_t frameDurationMs, uint16_t frameDelay);
+  /** @brief Configure the three shift register pins and the eigth row pins as outputs. */
+  void begin();
 
+  /**
+  * Draws a static 8x8 pattern for the specified duration in milliseconds.
+  *
+  * @param patternPtr Pointer to the 8-byte pattern array.
+  * @param durationMs Duration to display the pattern in milliseconds.
+  */
+  void drawPattern(const uint8_t* patternPtr, unsigned long durationMs);
+  /**
+   * Draws a static 8x8 pattern for the specified duration in milliseconds,
+   * with optional horizontal bit-flipping.
+   *
+   * @param patternPtr Pointer to the 8-byte pattern array.
+   * @param flipBits If true, bits will be flipped before display.
+   * @param durationMs Duration to display the pattern in milliseconds.
+   */
+  void drawPattern(const uint8_t* patternPtr, bool flipBits, unsigned long durationMs);
+  /**
+   * Plays an animation consisting of multiple 8x8 patterns without flipping.
+   *
+   * @param animation Array of pointers to 8-row patterns (PROGMEM or RAM).
+   * @param patternCount Number of frames in the animation.
+   * @param frameTimeMs How long (in milliseconds) to show each frame.
+   */
+  void drawAnimation(const uint8_t* const animation[], uint8_t patternCount, uint16_t frameTimeMs);
+  /**
+   * Plays an animation consisting of multiple 8x8 patterns with optional per-frame flipping.
+   *
+   * @param animation Array of pointers to 8-row patterns (PROGMEM or RAM).
+   * @param flipPattern Array of booleans; true ➜ show frame flipped.
+   * @param patternCount Number of frames in the animation.
+   * @param frameTimeMs How long (in milliseconds) to show each frame.
+   */
+  void drawAnimation(const uint8_t* const animation[],const bool flipPattern[],uint8_t patternCount,uint16_t frameTimeMs);
 
 private:
-  const uint8_t _pins [6][6][2];   // <-- three indices!
+  const uint8_t _rowPins [8];   // <-- three indices!
+  ShiftRegisterWriter _registerWriter;
+  static constexpr uint8_t COLUMNS_RESETED = 0b11111111;
 };
