@@ -1,0 +1,3 @@
+drawPattern      KEYWORD2
+drawAnimation       KEYWORD2
+LedMatrixAndShiftRegisterDrawer  KEYWORD1
