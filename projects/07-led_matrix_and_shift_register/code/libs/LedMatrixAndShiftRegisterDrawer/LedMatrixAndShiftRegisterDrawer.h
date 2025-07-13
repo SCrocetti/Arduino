@@ -21,6 +21,20 @@ public:
   /** @brief Configure the three shift register pins and the eigth row pins as outputs. */
   void begin();
 
+ /**
+  * Draws a static 8x8 pattern for aprox 1 mili
+  *
+  * @param patternPtr Pointer to the 8-byte pattern array.
+  */
+  void drawPattern(const uint8_t* patternPtrs);
+  /**
+   * Draws a static 8x8 pattern for aprox 1 mili
+   * with optional horizontal bit-flipping.
+   *
+   * @param patternPtr Pointer to the 8-byte pattern array.
+   * @param flipBits If true, bits will be flipped before display.
+   */
+  void drawPattern(const uint8_t* patternPtr, bool flipBits);
   /**
   * Draws a static 8x8 pattern for the specified duration in milliseconds.
   *
