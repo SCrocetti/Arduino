@@ -162,6 +162,20 @@ void setup() {
   generateFood();
 }
 
+void loop(){
+  constexpr uint8_t patternM[8] = {
+  0b10000001, 
+  0b11000011,
+  0b10100101,
+  0b10011001,
+  0b10000001,
+  0b10000001,
+  0b10000001,
+  0b10000001
+};
+  drawer.drawPattern(patternM);
+}
+/*
 void loop() {
   // Update direction based on buttons
   Node* head = snake.getHead();
@@ -230,3 +244,4 @@ void loop() {
   }
   
 }
+*/
