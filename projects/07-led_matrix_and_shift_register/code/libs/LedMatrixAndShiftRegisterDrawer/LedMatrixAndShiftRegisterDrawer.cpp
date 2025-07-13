@@ -46,7 +46,7 @@ void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr,  bo
   }
 }
 void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr, unsigned long durationMs){
-  drawPattern(patternPtr, false, durationMs);
+  drawPattern(patternPtr, false,  (unsigned long)durationMs);
 }
 
 
