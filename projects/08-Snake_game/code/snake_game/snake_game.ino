@@ -82,7 +82,7 @@ uint8_t food_position[2];
 int8_t deltaX=1;
 int8_t deltaY=0;
 unsigned long availableImputTime = 1000; 
-
+unsigned long lastInputCheck = 0;
 void updateGameState() {
   // 1. Clear the board
   for (int y = 0; y < 8; ++y)
@@ -131,6 +131,18 @@ void generateFood() {
   food_position[1] = emptyY[r];
   updateGameState();
 }
+void drawGameState() {
+    uint8_t ledMatrixState[8];
+    for (uint8_t y = 0; y < 8; ++y) {
+        uint8_t row = 0;
+        for (uint8_t x = 0; x < 8; ++x) {
+            row |= (GAME_STATE[y][x] ? 1 : 0) << (7 - x);
+        }
+        ledMatrixState[y] = row;
+    }
+    // call your LED drawing function here, e.g.:
+    // LedMatrixAndShiftRegisterDrawer.draw(ledMatrixState);
+}
 void setup() {
   for(uint8_t button=0;button<4;button++){
     pinMode(BUTTON_PINS[button], INPUT);
@@ -147,9 +159,10 @@ void loop() {
   // Update direction based on buttons
   Node* head = snake.getHead();
 
-  unsigned long startMillis = millis();   // Start time in ms
-  while (millis() - startMillis < availableImputTime) {
+  unsigned long now = millis();
 
+  if (now - lastInputCheck >= availableImputTime) {
+    lastInputCheck = now;
     // -------- Your code to measure --------
     if (deltaX != 0) { // Moving horizontally
       int up = digitalRead(BUTTON_PINS[0]);
@@ -173,26 +186,27 @@ void loop() {
       }
     }
     // -----------
+
+    head_next_position[0]=head->x+deltaX;
+    head_next_position[1]=head->y+deltaY;
+
+      // Update snake
+    snake.push(head_next_position[0], head_next_position[1]);
+      // Check food collision
+    head=snake.getHead();
+    if (food_position[0] == head->x &&
+        food_position[1] == head->y) {
+      snake_has_eaten = true;
+    }
+    if (!snake_has_eaten) {
+      snake.pop();
+      updateGameState();
+    } else {
+      generateFood();
+      snake_has_eaten = false;
+    }
   }
 
-  head_next_position[0]=head->x+deltaX;
-  head_next_position[1]=head->y+deltaY;
-
-    // Update snake
-  snake.push(head_next_position[0], head_next_position[1]);
-     // Check food collision
-  head=snake.getHead();
-  if (food_position[0] == head->x &&
-      food_position[1] == head->y) {
-    snake_has_eaten = true;
-  }
-  if (!snake_has_eaten) {
-    snake.pop();
-    updateGameState();
-  } else {
-    generateFood();
-    snake_has_eaten = false;
-  }
 
   // Check collisions
   if (head->x >= 8 || head->y >= 8 || head->x <=-1 || head->y<=-1) {
@@ -206,13 +220,6 @@ void loop() {
     Serial.flush();
     while (true);
   }
-  uint8_t matrixState[8];
-  for (uint8_t y = 0; y < 8; ++y) {
-      uint8_t row = 0;
-      for (uint8_t x = 0; x < 8; ++x) {
-          row |= (GAME_STATE[y][x] ? 1 : 0) << (7 - x); // MSB on the left
-      }
-      matrixState[y] = row;
-  }
+  drawGameState();
   
 }
