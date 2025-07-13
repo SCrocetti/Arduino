@@ -207,6 +207,7 @@ void loop() {
     }
   }
 
+  drawGameState();
 
   // Check collisions
   if (head->x >= 8 || head->y >= 8 || head->x <=-1 || head->y<=-1) {
@@ -220,6 +221,5 @@ void loop() {
     Serial.flush();
     while (true);
   }
-  drawGameState();
   
 }
