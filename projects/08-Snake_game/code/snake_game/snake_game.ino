@@ -75,19 +75,14 @@ LedMatrixAndShiftRegisterDrawer drawer(ROW_PINS,DATA_PIN, CLOCK_PIN, LATCH_PIN);
 // pins of the buttons are connected in the following order:
 // UP,DOWN,LEFT, RIGHT
 constexpr uint8_t BUTTON_PINS[4]={A0,A1,A2,A3};
-// direction of the head of the snake
-// UP=0
-// DOWN=1
-// LEFT=2
-// RIGHT=3
-uint8_t headDirection=3;
+
 bool snake_has_eaten=false;
 bool GAME_STATE[8][8];
 uint8_t head_next_position[2]={5,4};
 uint8_t food_position[2];
 int8_t deltaX=1;
 int8_t deltaY=0;
-unsigned long availableImputTime = 1000; 
+unsigned long availableImputTime = 2000; 
 unsigned long lastInputCheck = 0;
 void updateGameState() {
   // 1. Clear the board
@@ -161,64 +156,47 @@ void setup() {
 
   generateFood();
 }
-
-void loop(){
-  constexpr uint8_t patternM[8] = {
-  0b10000001, 
-  0b11000011,
-  0b10100101,
-  0b10011001,
-  0b10000001,
-  0b10000001,
-  0b10000001,
-  0b10000001
-};
-  drawer.drawPattern(patternM);
-}
-/*
 void loop() {
-  // Update direction based on buttons
   Node* head = snake.getHead();
 
-  unsigned long now = millis();
+  // --- Always check input ---
+  if (deltaX != 0) {
+    int up = digitalRead(BUTTON_PINS[0]);
+    int down = digitalRead(BUTTON_PINS[1]);
+    if (up == HIGH && down == LOW && deltaY != 1) {
+      deltaX = 0;
+      deltaY = -1;
+    } else if (down == HIGH && up == LOW && deltaY != -1) {
+      deltaX = 0;
+      deltaY = 1;
+    }
+  } else {
+    int left = digitalRead(BUTTON_PINS[2]);
+    int right = digitalRead(BUTTON_PINS[3]);
+    if (left == HIGH && right == LOW && deltaX != 1) {
+      deltaX = -1;
+      deltaY = 0;
+    } else if (right == HIGH && left == LOW && deltaX != -1) {
+      deltaX = 1;
+      deltaY = 0;
+    }
+  }
 
+  // --- Game state update only at intervals ---
+  unsigned long now = millis();
   if (now - lastInputCheck >= availableImputTime) {
     lastInputCheck = now;
-    // -------- Your code to measure --------
-    if (deltaX != 0) { // Moving horizontally
-      int up = digitalRead(BUTTON_PINS[0]);
-      int down = digitalRead(BUTTON_PINS[1]);
-      if (up == HIGH && down == LOW && deltaY != 1) {
-        deltaX = 0;
-        deltaY = -1;
-      } else if (down == HIGH && up == LOW && deltaY != -1) {
-        deltaX = 0;
-        deltaY = 1;
-      }
-    } else { // Moving vertically
-      int left = digitalRead(BUTTON_PINS[2]);
-      int right = digitalRead(BUTTON_PINS[3]);
-      if (left == HIGH && right == LOW && deltaX != 1) {
-        deltaX = -1;
-        deltaY = 0;
-      } else if (right == HIGH && left == LOW && deltaX != -1) {
-        deltaX = 1;
-        deltaY = 0;
-      }
-    }
-    // -----------
 
     head_next_position[0]=head->x+deltaX;
     head_next_position[1]=head->y+deltaY;
 
-      // Update snake
     snake.push(head_next_position[0], head_next_position[1]);
-      // Check food collision
-    head=snake.getHead();
-    if (food_position[0] == head->x &&
-        food_position[1] == head->y) {
+
+    head = snake.getHead();
+    if (food_position[0] == head->x && food_position[1] == head->y) {
       snake_has_eaten = true;
     }
+
     if (!snake_has_eaten) {
       snake.pop();
       updateGameState();
@@ -226,22 +204,19 @@ void loop() {
       generateFood();
       snake_has_eaten = false;
     }
-  }
 
+
+    if (head->x >= 8 || head->y >= 8 || head->x <= -1 || head->y <= -1) {
+      Serial.println("Game Over: Out of bounds");
+      Serial.flush();
+      while (true);
+    }
+
+    if (snake.isCollidingWithSelf()) {
+      Serial.println("Game Over: Collision with self");
+      Serial.flush();
+      while (true);
+    }
+  }
   drawGameState();
-
-  // Check collisions
-  if (head->x >= 8 || head->y >= 8 || head->x <=-1 || head->y<=-1) {
-    Serial.println("Game Over: Out of bounds");
-    Serial.flush();
-    while (true);
-  }
-
-  if (snake.isCollidingWithSelf()) {
-    Serial.println("Game Over: Collision with self");
-    Serial.flush();
-    while (true);
-  }
-  
 }
-*/
