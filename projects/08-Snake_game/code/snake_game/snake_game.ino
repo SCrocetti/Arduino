@@ -66,6 +66,12 @@ public:
 
 Snake snake;
 
+constexpr uint8_t DATA_PIN  = 10;        // 74HC595 SER
+constexpr uint8_t CLOCK_PIN = 12;        // 74HC595 SRCLK
+constexpr uint8_t LATCH_PIN = 11;        // 74HC595 RCLK
+constexpr uint8_t ROW_PINS[8] = {2, 3, 4, 5, 6, 7, 8, 9}; // Matrix rows
+
+LedMatrixAndShiftRegisterDrawer drawer(ROW_PINS,DATA_PIN, CLOCK_PIN, LATCH_PIN);
 // pins of the buttons are connected in the following order:
 // UP,DOWN,LEFT, RIGHT
 constexpr uint8_t BUTTON_PINS[4]={A0,A1,A2,A3};
@@ -141,9 +147,10 @@ void drawGameState() {
         ledMatrixState[y] = row;
     }
     // call your LED drawing function here, e.g.:
-    // LedMatrixAndShiftRegisterDrawer.draw(ledMatrixState);
+    drawer.drawPattern(ledMatrixState);
 }
 void setup() {
+  drawer.begin();
   for(uint8_t button=0;button<4;button++){
     pinMode(BUTTON_PINS[button], INPUT);
   }
