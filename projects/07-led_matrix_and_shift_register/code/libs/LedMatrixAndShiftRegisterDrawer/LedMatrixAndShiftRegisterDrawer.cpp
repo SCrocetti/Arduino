@@ -37,7 +37,7 @@ void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr,  bo
   uint8_t bitOrder = flipBits ? MSBFIRST : LSBFIRST;
   for (uint8_t row = 0; row < 8; ++row)
   {
-    uint8_t bits = ~pgm_read_byte(patternPtr + row);
+    uint8_t bits = patternPtr[row];
 
     digitalWrite(_rowPins[row], HIGH);
     _registerWriter.write(bits, bitOrder);
