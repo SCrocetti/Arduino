@@ -67,7 +67,7 @@ void LedMatrixAndShiftRegisterDrawer::drawAnimation(const uint8_t* const animati
 {
     for (uint8_t pattern = 0; pattern < patternCount; ++pattern)
     {
-        drawPattern(animation[pattern], flipPattern[pattern], frameTimeMs); // render one frame
+        drawPattern(animation[pattern], false, (unsigned long)frameTimeMs);
     }
 }
 
