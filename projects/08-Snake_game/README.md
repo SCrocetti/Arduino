@@ -33,3 +33,10 @@ In this project, we'll develop an Arduino library to control an 8 × 8 LED m
 You can find the complete schematic (KiCad + PDF) and a breadboard wiring diagram in the `circuit/` folder, alongside the Arduino library source code.
 
 ---
+
+## Pending Features
+
+1. Create new circuit schemma with the buttons
+2. Create the PCB design for the display and shiftregister 
+3. Create the PCB design for the controller
+4. Create a 3d print for the controller casing
