@@ -37,8 +37,9 @@ You can find the complete schematic (KiCad + PDF) and a breadboard wiring diagra
 ## Pending Features
 
 1. Create new circuit schemma with the buttons
-2. Add a pause/start and reset buttons
-3. Add an extra shift register
-4. Create the PCB design for the display and the shift registers
-5. Create the PCB design for the controller
-6. Create a 3d print for the controller casing
+2. Update the readme to the new features
+3. Add a pause/start and reset buttons
+4. Add an extra shift register
+5. Create the PCB design for the display and the shift registers
+6. Create the PCB design for the controller
+7. Create a 3d print for the controller casing
