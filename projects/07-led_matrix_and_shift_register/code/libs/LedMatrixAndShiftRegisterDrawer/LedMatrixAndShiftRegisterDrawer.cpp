@@ -29,8 +29,24 @@ void LedMatrixAndShiftRegisterDrawer::begin(){
     _registerWriter.begin();
     _registerWriter.write(COLUMNS_RESETED, MSBFIRST);
 }
+
+void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr){
+  drawPattern(patternPtr, false);
+}
+void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr,  bool flipBits){
+  uint8_t bitOrder = flipBits ? MSBFIRST : LSBFIRST;
+  for (uint8_t row = 0; row < 8; ++row)
+  {
+    uint8_t bits = ~patternPtr[row];
+
+    digitalWrite(_rowPins[row], HIGH);
+    _registerWriter.write(bits, bitOrder);
+    _registerWriter.write(COLUMNS_RESETED, MSBFIRST);
+    digitalWrite(_rowPins[row], LOW);
+  }
+}
 void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr, unsigned long durationMs){
-  drawPattern(patternPtr, false, durationMs);
+  drawPattern(patternPtr, false,  (unsigned long)durationMs);
 }
 
 
@@ -38,18 +54,9 @@ void LedMatrixAndShiftRegisterDrawer::drawPattern(const uint8_t* patternPtr, boo
 {
   const unsigned long FRAME_US = 973UL; // time per frame in microseconds
   unsigned long frames = durationMs * 1000 / FRAME_US;
-  uint8_t bitOrder = flipBits ? MSBFIRST : LSBFIRST;
 
   for (unsigned long frame = 0; frame < frames; frame++) {
-    for (uint8_t row = 0; row < 8; ++row)
-    {
-      uint8_t bits = ~pgm_read_byte(patternPtr + row);
-
-      digitalWrite(_rowPins[row], HIGH);
-      _registerWriter.write(bits, bitOrder);
-      _registerWriter.write(COLUMNS_RESETED, MSBFIRST);
-      digitalWrite(_rowPins[row], LOW);
-    }
+    drawPattern(patternPtr,flipBits);
   }
 }
 
@@ -60,7 +67,7 @@ void LedMatrixAndShiftRegisterDrawer::drawAnimation(const uint8_t* const animati
 {
     for (uint8_t pattern = 0; pattern < patternCount; ++pattern)
     {
-        drawPattern(animation[pattern], flipPattern[pattern], frameTimeMs); // render one frame
+        drawPattern(animation[pattern], false, (unsigned long)frameTimeMs);
     }
 }
 
@@ -70,6 +77,6 @@ void LedMatrixAndShiftRegisterDrawer::drawAnimation(const uint8_t* const animati
 {
     for (uint8_t pattern = 0; pattern < patternCount; ++pattern)
     {
-        drawPattern(animation[pattern], frameTimeMs); // render one frame
+        drawPattern(animation[pattern], (unsigned long)frameTimeMs); // render one frame
     }
 }
