@@ -1,76 +1,80 @@
-# 02-Relay, LEDs, and Tactile Switch
+# 02-Relay, LEDs, and Tactile Switch (with 9 V Battery Power)
 
 Welcome to the **02-Relay, LEDs, and Tactile Switch** project.  
-The goal is to use a **tactile button** to send a signal to the **Arduino**, which will then **toggle a relay**. The relay in turn controls two LEDs that indicate its state.
+The goal is to use a **tactile button** to send a signal to the **Arduino**, which will **toggle a relay**.  
+The relay will then **switch a 9 V DC battery** that powers two LEDs to indicate the relay’s state.
 
 ---
 
 ## 🧰 Components Required
 
-- 1 x Arduino Uno (or compatible board)  
-- 1 x Relay module (Tongling JQC-3FF-S-Z)  
-- 1 x Breadboard  
-- 1 x Green LED  
-- 1 x Red LED  
-- 2 x 220Ω resistors (for LEDs)  
-- 1 x Tactile pushbutton switch  
-- 1 x 10kΩ resistor (pull-down for button)  
+- 1 × Arduino Uno (or compatible board)  
+- 1 × Relay module (Tongling JQC-3FF-S-Z or similar 5 V coil)  
+- 1 × Breadboard  
+- 1 × Green LED  
+- 1 × Red LED  
+- 2 × 220 Ω resistors (for LEDs)  
+- 1 × Tactile pushbutton switch  
+- 1 × 10 kΩ resistor (pull-down for button)  
+- 1 × 9 V battery + clip connector  
 - Jumper wires  
-- Power supply (5V from Arduino or external)
+
+> ⚠️ **Note:** The relay module’s coil is powered by the Arduino (5 V), but the **load circuit (LEDs)** is powered separately by the **9 V battery**.
 
 ---
 
 ## 🔌 Circuit Description
 
-The project uses a **relay to control two LEDs**, and a **tactile button** to tell the Arduino when to toggle the relay.
+The project uses a **relay to switch a 9 V battery** that powers two LEDs.  
+The **Arduino** controls the relay through a digital output pin, and a **tactile button** tells the Arduino when to toggle the relay.
 
-- 🔴 **Red LED**: ON by default, OFF when relay is active  
-- 🟢 **Green LED**: OFF by default, ON when relay is active  
-- 🔘 **Tactile Button**: Used to toggle the relay
+- 🔴 **Red LED** – ON when relay is idle (NC contact)  
+- 🟢 **Green LED** – ON when relay is active (NO contact)  
+- 🔘 **Tactile Button** – Used to toggle the relay  
 
 ---
 
 ### 1. 🧠 Relay Control (Arduino to Relay Module)
 
-The relay is triggered using one of Arduino’s digital output pins.
+| Relay Pin | Connection |
+|------------|-------------|
+| IN | Arduino digital pin 7 |
+| VCC | Arduino 5 V |
+| GND | Arduino GND |
 
-- `IN` → Arduino digital pin (e.g., pin 7)  
-- `VCC` → Arduino 5V  
-- `GND` → Arduino GND  
-
-> When the Arduino sets the pin LOW, the relay activates (assuming active-low logic).
+> The Arduino triggers the relay (active LOW or HIGH depending on the module).
 
 ---
 
 ### 2. 👆 Button Input (Tactile Switch to Arduino)
 
-The tactile switch is connected as a digital input with a pull-down resistor.
-
-- One leg of the button → Arduino digital pin (e.g., pin 2)  
-- Same leg → 10kΩ resistor → GND  
-- Opposite leg → 5V  
+| Button Pin | Connection |
+|-------------|-------------|
+| One leg | Arduino digital pin 3 |
+| Same leg | 10 kΩ resistor → GND |
+| Opposite leg | 5 V |
 
 > When pressed, the pin reads HIGH. When released, it reads LOW.
 
 ---
 
-### 3. 💡 Load Switching (Relay to LEDs)
+### 3. 💡 Load Switching (Relay to 9 V LEDs)
 
-The relay switches 5V to either of the LEDs depending on its state.
+The **relay** switches the **9 V battery** supply to the LEDs instead of the Arduino’s 5 V.
 
 #### 🔴 Red LED (Normally ON)
-- `COM` on relay → 5V  
-- `NC` on relay → Anode of red LED  
-- Cathode → 220Ω resistor → GND  
+- **9 V battery positive (+)** → `COM` on relay  
+- `NC` on relay → Anode of **Red LED**  
+- Cathode → **220 Ω resistor** → **9 V battery negative (−)**  
 
-> ON when the relay is idle.
+> Red LED is ON when relay is idle.
 
 #### 🟢 Green LED (Activated ON)
-- `COM` on relay → 5V  
-- `NO` on relay → Anode of green LED  
-- Cathode → 220Ω resistor → GND  
+- **9 V battery positive (+)** → `COM` on relay  
+- `NO` on relay → Anode of **Green LED**  
+- Cathode → **220 Ω resistor** → **9 V battery negative (−)**  
 
-> ON only when the relay is activated.
+> Green LED turns ON when relay is activated.
 
 ---
 
@@ -81,11 +85,10 @@ The relay switches 5V to either of the LEDs depending on its state.
 [Arduino 5V] -----> [VCC on Relay Module]
 [Arduino GND] ----> [GND on Relay Module]
 
-[+5V] ------------> [COM on Relay]
+[9V (+)] ---------> [COM on Relay]
+[NC] --------------> [Red LED + 220Ω] ---> [9V (−)]
+[NO] --------------> [Green LED + 220Ω] ---> [9V (−)]
 
-[NC on Relay] ----> [Red LED + 220Ω] ---> [GND]
-[NO on Relay] ----> [Green LED + 220Ω] ---> [GND]
-
-[Button Side 1] ---> [Arduino Pin 2]
+[Button Side 1] ---> [Arduino Pin 3]
 [Button Side 1] ---> [10kΩ Resistor] ---> [GND]
 [Button Side 2] ---> [5V]
