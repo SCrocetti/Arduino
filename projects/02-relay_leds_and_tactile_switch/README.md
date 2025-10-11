@@ -13,7 +13,7 @@ The relay will then **switch a 9 V DC battery** that powers two LEDs to indicate
 - 1 × Breadboard  
 - 1 × Green LED  
 - 1 × Red LED  
-- 2 × 220 Ω resistors (for LEDs)  
+- 2 × 10 kΩ resistors (for LEDs)  
 - 1 × Tactile pushbutton switch  
 - 1 × 10 kΩ resistor (pull-down for button)  
 - 1 × 9 V battery + clip connector  
@@ -65,14 +65,14 @@ The **relay** switches the **9 V battery** supply to the LEDs instead of the Ard
 #### 🔴 Red LED (Normally ON)
 - **9 V battery positive (+)** → `COM` on relay  
 - `NC` on relay → Anode of **Red LED**  
-- Cathode → **220 Ω resistor** → **9 V battery negative (−)**  
+- Cathode → **10 kΩ resistor** → **9 V battery negative (−)**  
 
 > Red LED is ON when relay is idle.
 
 #### 🟢 Green LED (Activated ON)
 - **9 V battery positive (+)** → `COM` on relay  
 - `NO` on relay → Anode of **Green LED**  
-- Cathode → **220 Ω resistor** → **9 V battery negative (−)**  
+- Cathode → **10 kΩ  resistor** → **9 V battery negative (−)**  
 
 > Green LED turns ON when relay is activated.
 
@@ -86,8 +86,8 @@ The **relay** switches the **9 V battery** supply to the LEDs instead of the Ard
 [Arduino GND] ----> [GND on Relay Module]
 
 [9V (+)] ---------> [COM on Relay]
-[NC] --------------> [Red LED + 220Ω] ---> [9V (−)]
-[NO] --------------> [Green LED + 220Ω] ---> [9V (−)]
+[NC] --------------> [Red LED + 10 kΩ ] ---> [9V (−)]
+[NO] --------------> [Green LED + 10 kΩ ] ---> [9V (−)]
 
 [Button Side 1] ---> [Arduino Pin 3]
 [Button Side 1] ---> [10kΩ Resistor] ---> [GND]
