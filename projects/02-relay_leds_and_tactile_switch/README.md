@@ -92,3 +92,9 @@ The **relay** switches the **9 V battery** supply to the LEDs instead of the Ard
 [Button Side 1] ---> [Arduino Pin 3]
 [Button Side 1] ---> [10kΩ Resistor] ---> [GND]
 [Button Side 2] ---> [5V]
+```
+## Circuit Diagram
+
+You can find the schematic and wiring diagram in the `circuit/` folder.
+
+![Shematic and wiring diagram](./asets/circuit.png)
