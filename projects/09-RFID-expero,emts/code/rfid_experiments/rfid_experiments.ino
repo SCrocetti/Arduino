@@ -19,8 +19,7 @@ void loop() {
         {  
   		delay(5);
             Serial.println("Tarjeta en rango");
-            Serial.println(mfrc522.PCD_ReadRegister(mfrc522.VersionReg), HEX);
-            /*
+      
            if ( mfrc522.PICC_ReadCardSerial()) 
             {
                   // Enviamos serialemente su UID
@@ -32,6 +31,6 @@ void loop() {
                   Serial.println();
                   // Terminamos la lectura de la tarjeta  actual
                   mfrc522.PICC_HaltA();         
-            }      */
+            } 
 	}	
 }
