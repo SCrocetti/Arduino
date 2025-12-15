@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "JQC-3FF-S-Z")(type "Legacy")(uri "${KIPRJMOD}/JQC-3FF-S-Z.lib")(options "")(descr ""))
+)
