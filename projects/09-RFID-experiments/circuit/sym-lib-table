@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "RFID-RC522")(type "Legacy")(uri "${KIPRJMOD}/RFID-RC522.lib")(options "")(descr ""))
+)
