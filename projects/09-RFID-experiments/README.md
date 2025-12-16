@@ -23,7 +23,6 @@ In this project, we use the **MFRC522** library to read from and write to RFID t
 - **Write mode**
   - Writes a **fixed text** to the RFID tag
   - Useful for testing and validating tag programming
-
 ---
 
 ## Components
@@ -69,7 +68,9 @@ Each button uses an **external pull-up resistor** to ensure a stable default log
 
 #### Button functions
 
-The two buttons, one for setting the read mode and one for setting the write mode, are conected to the digital inputs D2 and D3 respectibly
+The two buttons, one for setting the read mode and one for setting the write mode, are conected to the digital inputs D2 and D3 respectibly.
+
+To set the mode, hold the respective button until the respective ligth turns on and the other one off, green for reading and red for writing 
 
 #### Wiring
 
