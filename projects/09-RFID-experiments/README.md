@@ -59,10 +59,17 @@ The RC522 module communicates with the Arduino using the **SPI** protocol.
 > ⚠️ **Important:** The RC522 operates at **3.3V**. Do **not** connect it to 5V.
 
 ---
+### Leds
+
+Each led is conected to a current limiting resistor  to **GND** and are powered by the digital output pins D4 for the green led and D5 for the red led
 
 ### Buttons (Using External Pull-Up Resistors)
 
 Each button uses an **external pull-up resistor** to ensure a stable default logic level.
+
+#### Button functions
+
+The two buttons, one for setting the read mode and one for setting the write mode, are conected to the digital inputs D2 and D3 respectibly
 
 #### Wiring
 
