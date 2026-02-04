@@ -105,3 +105,5 @@ The **negative terminal of the battery pack MUST be connected to Arduino GND** t
 ## Circuit Diagram
 
 You can find the schematic and wiring diagram in the `circuit/` folder.
+
+![Circuit schematic](./asets/circuit_shemma.png)
