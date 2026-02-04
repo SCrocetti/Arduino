@@ -105,3 +105,5 @@ El **terminal negativo del paquete de baterías DEBE estar conectado al GND del 
 ## Diagrama del Circuito
 
 El esquema y el diagrama de cableado se encuentran en la carpeta `circuit/`.
+
+![Diagrama de circuito](./asets/circuit_shemma.png)
