@@ -62,6 +62,12 @@ So:
 
 > **4096 steps = 1 full revolution of the output shaft**
 
+
+But the stepper.h library does fullsteps, with more torque and half the resolution so the number of steps goes to:
+
+> **2048 steps = 1 full revolution of the output shaft**
+
+
 ---
 
 ### Key speed-related specifications
@@ -91,20 +97,26 @@ Formula:
 **Safe working speed (recommended):**
 
 ``` math
-  RPM = (100 × 60) / 4096 ≈ 1.46 RPM
+  RPM = (100 × 60) / 2048 ≈ 2.93 RPM
+```
+
+**Starting from rest speed:**
+
+``` math
+  RPM = (600 × 60) / 2048 ≈ 17.58 RPM
 ```
 
 **Practical upper limit (already spinning, no load):**
 
 ``` math
-  RPM = (1000 × 60) / 4096 ≈ 14.6 RPM
+  RPM = (1000 × 60) / 2048 ≈ 29.3  RPM
 ```
 ---
 
 ### Real-world takeaway
 
-- ✅ **Reliable usable speed**: **1–5 RPM**
-- ⚠️ **Upper practical limit**: **~10–15 RPM**
+- ✅ **Reliable usable speed**: **3–17 RPM**
+- ⚠️ **Upper practical limit**: **~17–29 RPM**
 - ❌ **Above this range**:
   - Missed steps
   - Negligible torque
@@ -161,13 +173,13 @@ reducing that we got
 substituing from the datasheet
 
 ``` math
-  steps = speed × 4096/2000
+  steps = speed × 2048/2000
 ```
 
 aproximatly
 
 ``` math
-  steps=speed  × 2
+  steps=speed
 ```
 ---
 
