@@ -50,6 +50,9 @@ Entonces:
 
 > **4096 pasos = 1 vuelta completa del eje de salida**
 
+Pero la libreria stepper.h hace pasos completos lo que sacrifica la mitad de la resolucion a cambio de torque, por lo que la cantidad de pasos queda:
+
+> **2048 steps = 1 vuelta completa del eje de salida**
 ---
 
 ### Especificaciones clave relacionadas con la velocidad
@@ -78,19 +81,25 @@ Fórmula:
 **Velocidad segura de trabajo (recommendada):**
 
 ``` math
-  RPM = (100 × 60) / 4096 ≈ 1.46 RPM
+  RPM = (100 × 60) / 2048 ≈ 1.46 RPM
+```
+
+**Velocidad de arranque desde reposo:**
+
+``` math
+  RPM = (600 × 60) / 2048 ≈ 17.58 RPM
 ```
 
 **Limite superior practico (ya girando, sin carga):**
 
 ``` math
-  RPM = (1000 × 60) / 4096 ≈ 14.6 RPM
+  RPM = (1000 × 60) / 2048 ≈ 29.3 RPM
 ```
 
 ### Conclusión práctica en el mundo real
 
-- ✅ **Velocidad usable y confiable**: **1–5 RPM**
-- ⚠️ **Límite práctico superior**: **~10–15 RPM**
+- ✅ **Velocidad usable y confiable**: **3–17 RPM**
+- ⚠️ **Límite práctico superior**: **~17–29 RPM**
 - ❌ **Por encima de este rango**:
   - Pérdida de pasos
   - Torque prácticamente nulo
