@@ -1,7 +1,7 @@
 # 10-Stepper-Velocity-Control
 
 Bienvenido al proyecto **10-Stepper-Velocity-Control**.  
-El propósito de este proyecto es controlar la **velocidad y dirección** de un **motor paso a paso 28BYJ-48** utilizando un **Arduino UNO**, una **placa driver ULN2003**, un **potenciómetro** y una **fuente de alimentación externa de 6 V formada por 4 baterías AAA**.
+El propósito de este proyecto es controlar la **velocidad y dirección** de un **motor paso a paso 28BYJ-48** utilizando un **Arduino UNO** con la libreria **stepper**, una **placa driver ULN2003**, un **potenciómetro** y una **fuente de alimentación externa de 6 V formada por 4 baterías AAA**.
 
 El potenciómetro se utiliza como entrada analógica, donde **la mitad de su recorrido controla la rotación en sentido antihorario** y **la otra mitad controla la rotación en sentido horario**, quedando el motor detenido en la posición central.
 
@@ -31,6 +31,133 @@ Este rango se divide en dos mitades:
 
 ---
 
+### De dónde sale la velocidad máxima
+
+En los motores paso a paso, la **velocidad máxima no es un valor fijo único** como en los motores DC. En su lugar, se deduce a partir de las **frecuencias de paso indicadas en el datasheet**, combinadas con el **ángulo de paso** y, en este caso, la **reducción de la caja de engranajes**.
+
+Según el datasheet:
+
+- **Ángulo de paso (motor interno)**: `5.625°`
+- **Reducción de engranajes**: `64 : 1`
+
+Esto determina la cantidad de pasos por revolución del eje de salida:
+
+
+``` math
+  360° / (5.625° / 64) ≈ 4096 steps
+```
+Entonces:
+
+> **4096 pasos = 1 vuelta completa del eje de salida**
+
+---
+
+### Especificaciones clave relacionadas con la velocidad
+
+Los parámetros más relevantes del datasheet son:
+
+- **Frecuencia nominal**: `100 Hz`
+- **Frecuencia máxima de arranque (idle in-traction)**: `> 600 Hz`
+- **Frecuencia máxima en marcha (idle out-traction)**: `> 1000 Hz`
+
+En términos prácticos:
+
+- **100 Hz** → funcionamiento seguro y confiable, con torque utilizable  
+- **600 Hz** → frecuencia más alta a la que el motor puede **arrancar desde reposo**  
+- **1000 Hz** → frecuencia más alta que el motor puede **mantener una vez que ya está girando**, sin carga
+
+---
+
+### Conversión de frecuencia a RPM (eje de salida)
+
+Fórmula:
+
+``` math
+  RPM = (frequency × 60) / steps_per_revolution
+```
+**Velocidad segura de trabajo (recommendada):**
+
+``` math
+  RPM = (100 × 60) / 4096 ≈ 1.46 RPM
+```
+
+**Limite superior practico (ya girando, sin carga):**
+
+``` math
+  RPM = (1000 × 60) / 4096 ≈ 14.6 RPM
+```
+
+### Conclusión práctica en el mundo real
+
+- ✅ **Velocidad usable y confiable**: **1–5 RPM**
+- ⚠️ **Límite práctico superior**: **~10–15 RPM**
+- ❌ **Por encima de este rango**:
+  - Pérdida de pasos
+  - Torque prácticamente nulo
+  - Zumbido audible con poca o ninguna rotación
+
+
+#### Cálculo del tiempo entre pasos y retardos
+
+Para controlar la velocidad de un motor paso a paso, calculamos el **tiempo entre pasos** en función de la velocidad de rotación deseada.
+
+### Tiempo por paso
+
+
+``` math
+  t_step = 60 / (velocidad × pasosPorRevolucion)
+```
+
+Donde:
+- `t_step` → tiempo de un solo paso (segundos)
+- `velocidad` → velocidad del motor en **RPM**
+- `pasosPorRevolucion` → número total de pasos para una revolución completa
+
+Esta fórmula convierte las RPM (revoluciones por minuto) en el retardo necesario entre pasos individuales.
+
+### Ventana máxima de retardo
+
+``` math
+  steps = maxDelay / t_step
+```
+
+Si se conoce el tiempo de retardo disponible, esta fórmula nos indica cuántos pasos pueden ejecutarse dentro de esa ventana.
+
+### Expresión combinada
+
+Sustituyendo `t_step` en la ecuación:
+
+
+``` math
+  steps = (maxDelay × velocidad × pasosPorRevolucion) / 60
+```
+
+
+Por ejemplo, si `maxDelay = 30 ms`:
+
+
+``` math
+  steps = (30 / 1000 )× velocidad × pasosPorRevolucion/ 60
+```
+reduciendo tenemos:
+
+``` math
+  steps = velocidad × pasosPorRevolucion/2000
+```
+
+
+sustituyendo del datasheet
+
+``` math
+  steps = velocidad × 4096/2000
+```
+
+aproximadamaente
+
+``` math
+  steps=velocidad  × 2
+```
+---
 ## Comportamiento
 
 - Al girar el potenciómetro completamente hacia la **izquierda**, el motor gira a **velocidad máxima en sentido antihorario**.
