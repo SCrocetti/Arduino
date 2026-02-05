@@ -28,6 +28,6 @@ void loop() {
   }
 
   myStepper.setSpeed(speed);
-  int steps=speed*stepsPerRevolution/2000;
+  int steps=maxDelay*speed*stepsPerRevolution/60000;
   myStepper.step(steps*direction); 
 }
