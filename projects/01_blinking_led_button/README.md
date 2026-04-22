@@ -1,4 +1,4 @@
-# 🔹 01 - Blinking LED & Button
+# 🔹 01 - Toggle LED System
 
 [English](#english) | [Español](#espanol)
 
