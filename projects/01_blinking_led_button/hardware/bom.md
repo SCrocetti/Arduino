@@ -1,4 +1,4 @@
-# 📑 Bill of Materials: 01 - Blinking LED & Button
+# 📑 Bill of Materials: 01 - Toggle LED System
 
 [English](#english) | [Español](#espanol)
 
