@@ -23,7 +23,7 @@ A curated collection of **Arduino-based electronics projects**, ranging from fun
 ```
 arduino-projects/
 ├── projects/
-│   ├── 01_blinking_led_button/
+│   ├── 01_toggle_led_system/
 │   ├── 02_relay_leds_tactile_switch/
 │   ├── 03_led_matrix/
 │   ├── 04_led_switching_experiments/
@@ -47,7 +47,7 @@ tools/    # scripts and utilities
 
 ## 🚀 Projects
 
-### 🔹 01 - Blinking LED & Button
+### 🔹 01 - Toggle LED System
 
 Basic GPIO control with input/output handling.
 
@@ -177,7 +177,7 @@ Una colección de proyectos electrónicos basados en **Arduino**, que van desde 
 ```
 arduino-projects/
 ├── projects/
-│   ├── 01_blinking_led_button/
+│   ├── 01_toggle_led_system/
 │   ├── 02_relay_leds_tactile_switch/
 │   ├── 03_led_matrix/
 │   ├── 04_led_switching_experiments/
@@ -201,7 +201,7 @@ tools/    # scripts y utilidades
 
 ## 🚀 Proyectos
 
-### 🔹 01 - LED Parpadeante y Botón
+### 🔹 01 - Sistema de Alternancia de LED
 
 Control básico de GPIO con entradas y salidas.
 
