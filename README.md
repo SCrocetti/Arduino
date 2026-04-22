@@ -1,10 +1,11 @@
 # 🔌 Arduino Projects Portfolio
 
-[English](#-english) | [Español](#-español)
+[English](#english) | [Español](#espanol)
 
 ---
 
 ## 🇺🇸 English
+<a id="english"></a>
 
 A curated collection of **Arduino-based electronics projects**, ranging from fundamental circuits to more complex systems like LED matrices and games.
 
@@ -158,6 +159,7 @@ See the [LICENSE](./LICENSE) file for details.
 ---
 
 ## 🇪🇸 Español
+<a id="espanol"></a>
 
 Una colección de proyectos electrónicos basados en **Arduino**, que van desde circuitos fundamentales hasta sistemas más complejos como matrices LED y juegos.
 
