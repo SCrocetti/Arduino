@@ -52,7 +52,7 @@ Este proyecto es una introducción fundamental al control de **GPIO (Entrada/Sal
 * **Resistencia 10kΩ** (1) - *Pull-down para el botón*
 * **Pulsador** (1)
 
-> [!NOTE]
+> [!NOTA]
 > Para la lista completa de piezas, consulta el [BOM](./hardware/bom.md) en la carpeta de hardware.
 
 ### Diseño del Circuito
