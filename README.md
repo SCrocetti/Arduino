@@ -24,7 +24,7 @@ A curated collection of **Arduino-based electronics projects**, ranging from fun
 arduino-projects/
 ├── projects/
 │   ├── 01_toggle_led_system/
-│   ├── 02_relay_leds_tactile_switch/
+│   ├── 02_relay_dc_switching/
 │   ├── 03_led_matrix/
 │   ├── 04_led_switching_experiments/
 │   ├── 05_led_matrix_sweep/
@@ -53,7 +53,7 @@ Basic GPIO control with input/output handling.
 
 ---
 
-### 🔹 02 - Relay, LEDs & Tactile Switch
+### 🔹 02 - Relay DC Switching
 
 Controlling higher-power components using relays.
 
@@ -178,7 +178,7 @@ Una colección de proyectos electrónicos basados en **Arduino**, que van desde 
 arduino-projects/
 ├── projects/
 │   ├── 01_toggle_led_system/
-│   ├── 02_relay_leds_tactile_switch/
+│   ├── 02_relay_dc_switching/
 │   ├── 03_led_matrix/
 │   ├── 04_led_switching_experiments/
 │   ├── 05_led_matrix_sweep/
