@@ -42,6 +42,8 @@ For specific wiring details and coordinate mapping, refer to the following docum
 ### Circuit Schematic
 The matrix is controlled by mapping even-numbered pins (2-12) to rows and odd-numbered pins (3-13) to columns.
 
+![A-1088B8 Pinout](./hardware/A-1088B8_pinout.png)
+
 ![LED Matrix Schematic](./media/circuit_schemma.png)
 
 ---
@@ -83,5 +85,7 @@ Para detalles específicos de cableado y mapeo de coordenadas, consulta los sigu
 
 ### Esquema del Circuito
 La matriz se controla mapeando los pines pares (2-12) a las filas y los pines impares (3-13) a las columnas.
+
+![A-1088B8 Pinout](./hardware/A-1088B8_pinout.png)
 
 ![Esquema de la Matriz LED](./media/circuit_schemma.png)
