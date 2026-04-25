@@ -1,30 +1,42 @@
-const bool on = true;
+/*
+ * Project: 03 - Inner 6x6 Matrix Sweep
+ * Description: Sequential sweep of the inner 6x6 grid of an 8x8 LED Matrix.
+ * Connections: 
+ * - Even pins (2-12) -> Rows (Anodes)
+ * - Odd pins (3-13)  -> Columns (Cathodes)
+ */
+
 const long delay_time = 300;
+
 void setup() {
-  // Set all pins conected to the led matrix to output
-  // we only controll rows 2 to 7 and columns 2 to 7
-  for(int i=2;i<14;i++){
+  // Set all pins connected to the LED matrix as OUTPUT (Pins 2 to 13)
+  for (int i = 2; i < 14; i++) {
     pinMode(i, OUTPUT);
   }
-  // Set all catode (odd) pines to high so those leds wont fire whe their row is on high
-  for(int i=3;i<14;i+=2){
-    digitalWrite(i,HIGH);
+
+  // Set all cathode pins (ODD) to HIGH to ensure LEDs are OFF initially
+  // In a common anode matrix, the cathode must be LOW to complete the circuit
+  for (int i = 3; i < 14; i += 2) {
+    digitalWrite(i, HIGH);
   }
 }
 
 void loop() {
-  // even pins are anode for the leds witch are the rows of the matrix
-  for(int i=2;i<13;i+=2){
-    // odd pins are catode for the leds witch are the columns of the matrix
-    for(int j=3;j<14;j+=2){
-      digitalWrite(i,HIGH);
-      digitalWrite(j,LOW);
+  // OUTER LOOP: Iterates through even pins (Rows / Anodes)
+  for (int i = 2; i < 13; i += 2) {
+    
+    // INNER LOOP: Iterates through odd pins (Columns / Cathodes)
+    for (int j = 3; j < 14; j += 2) {
+      
+      // Turn ON the target LED
+      digitalWrite(i, HIGH); // Activate Row
+      digitalWrite(j, LOW);  // Activate Column (Sink current)
+      
       delay(delay_time);
 
-
-      digitalWrite(i,LOW);
-      digitalWrite(j,HIGH);
+      // Turn OFF the target LED (Prepare for the next one)
+      digitalWrite(i, LOW);
+      digitalWrite(j, HIGH);
     }
-
   }
 }
