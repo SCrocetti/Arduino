@@ -1,4 +1,4 @@
-# 🔹 02 - Relay DC Switching
+# 🔹 02 - Relay DC Switching / 02 - Conmutación DC mediante Relé
 
 [English](#english) | [Español](#espanol)
 
@@ -30,7 +30,7 @@ This project demonstrates **Power Isolation** using a mechanical relay. The Ardu
 ### Circuit Design
 The Arduino triggers the relay coil via digital pin 7. The relay's Common (COM) pin is connected to the 9V battery positive terminal, switching power between the Red LED (NC) and Green LED (NO).
 
-![Schematic and Wiring Diagram](./media/schematic.png)
+![Schematic and Wiring Diagram](./media/circuit_schemma.png)
 
 ---
 
@@ -58,6 +58,6 @@ Este proyecto demuestra el **Aislamiento de Potencia** utilizando un relé mecá
 ### Diseño del Circuito
 El Arduino activa la bobina del relé a través del pin digital 7. El pin Común (COM) del relé se conecta al terminal positivo de la batería de 9V, alternando la energía entre el LED Rojo (NC) y el LED Verde (NO).
 
-![Esquema y Diagrama de Cableado](./media/schematic.png)
+![Esquema y Diagrama de Cableado](./media/circuit_schemma.png)
 
 ---
