@@ -1,4 +1,4 @@
-# 📑 Bill of Materials: 01 - Toggle LED System
+# 📑 Bill of Materials: 01 - Toggle LED System / Lista de Materiales: 01 - Sistema de Conmutación de LED
 
 [English](#english) | [Español](#espanol)
 
