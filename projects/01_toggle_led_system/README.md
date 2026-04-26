@@ -30,7 +30,7 @@ This project is a fundamental introduction to **GPIO (General Purpose Input/Outp
 ### Circuit Design
 The LED is connected to a digital output pin, while the button is connected to a digital input pin with a pull-down resistor to ground.
 
-![Schematic and Wiring Diagram](./media/schematic.png)
+![Schematic and Wiring Diagram](./media/circuit_schemma.png)
 
 ---
 
@@ -58,6 +58,6 @@ Este proyecto es una introducción fundamental al control de **GPIO (Entrada/Sal
 ### Diseño del Circuito
 El LED está conectado a un pin de salida digital, mientras que el botón está conectado a un pin de entrada digital con una resistencia pull-down a tierra.
 
-![Esquema y Diagrama de Cableado](./media/schematic.png)
+![Esquema y Diagrama de Cableado](./media/circuit_schemma.png)
 
 ---
