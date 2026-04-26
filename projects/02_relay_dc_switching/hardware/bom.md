@@ -1,4 +1,4 @@
-# 📑 Bill of Materials: 02 - Relay DC Switching
+# 📑 Bill of Materials: 02 - Relay DC Switching /  Lista de Materiales: 02 - Conmutación DC mediante Relé
 
 [English](#english) | [Español](#espanol)
 
