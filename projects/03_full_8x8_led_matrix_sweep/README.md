@@ -48,6 +48,13 @@ The matrix is controlled by mapping pins to all 8 rows and 8 columns. Ensure the
 
 ---
 
+### Physical Assembly
+This is the real-world wiring of the Arduino Uno and the 1088BS matrix using a breadboard for the current-limiting resistors.
+
+![Physical Mounting](./media/mounting.jpeg)
+
+---
+
 ## 🇪🇸 Español
 <a id="espanol"></a>
 
@@ -75,3 +82,12 @@ La matriz se controla mapeando los pines a las 8 filas y 8 columnas. Asegúrese 
 ![A-1088B8 Pinout](./hardware/A-1088B8_pinout.png)
 
 ![Esquema de la Matriz LED](./media/circuit_schemma.png)
+
+---
+
+### Ensamblaje Físico
+Este es el cableado real del Arduino Uno y la matriz 1088BS utilizando una protoboard para las resistencias limitadoras de corriente.
+
+![Montaje Físico](./media/mounting.jpeg)
+
+---
