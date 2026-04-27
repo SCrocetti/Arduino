@@ -25,7 +25,7 @@ arduino-projects/
 ├── projects/
 │   ├── 01_toggle_led_system/
 │   ├── 02_relay_dc_switching/
-│   ├── 03_inner_6x6_matrix_sweep/
+│   ├── 03_full_8x8_led_matrix_sweep/
 │   ├── 04_led_switching_experiments/
 │   ├── 05_led_matrix_sweep/
 │   ├── 06_shift_register/
@@ -59,9 +59,11 @@ Controlling higher-power components using relays.
 
 ---
 
-### 🔹 03 - Inner 6x6 Matrix Sweep 
+### 🔹 03 - Full 8x8 LED Matrix Sweep 
 
-Sequential sweep across the internal 6x6 grid of an 8x8 LED matrix.
+Sequential sweep across an 8x8 LED matrix.
+
+![Matrix Sweep Demo](./projects/03_full_8x8_led_matrix_sweep/media/demostration.gif)
 
 ---
 
@@ -179,7 +181,7 @@ arduino-projects/
 ├── projects/
 │   ├── 01_toggle_led_system/
 │   ├── 02_relay_dc_switching/
-│   ├── 03_inner_6x6_matrix_sweep/
+│   ├── 03_full_8x8_led_matrix_sweep/
 │   ├── 04_led_switching_experiments/
 │   ├── 05_led_matrix_sweep/
 │   ├── 06_shift_register/
@@ -213,9 +215,11 @@ Control de componentes de mayor potencia mediante relés.
 
 ---
 
-### 🔹 03 - Barrido de Matriz Interna 6x6
+### 🔹 03 - Barrido de Matriz LED Completa 8x8
 
-Barrido secuencial a través de la cuadrícula interna de **6x6** de una matriz LED de **8x8**.
+Barrido secuencial a través de una matriz de LEDs de 8x8.
+
+![Demo de Barrido de Matrix](./projects/03_full_8x8_led_matrix_sweep/media/demostration.gif)
 
 ---
 
