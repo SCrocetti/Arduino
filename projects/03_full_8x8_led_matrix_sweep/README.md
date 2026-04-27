@@ -52,7 +52,7 @@ The matrix is controlled by mapping pins to all 8 rows and 8 columns. Ensure the
 This is the real-world wiring of the Arduino Uno and the 1088BS matrix using a breadboard for the current-limiting resistors.
 
 ![Physical Mounting](./media/mounting.jpeg)
-
+ 
 ---
 
 ## 🇪🇸 Español
