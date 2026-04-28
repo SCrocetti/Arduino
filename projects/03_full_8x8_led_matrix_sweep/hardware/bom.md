@@ -16,7 +16,8 @@
 
 ### 🔌 Connection & Prototyping
 * **Breadboard**: 1x Full-size (830 points).
-* **Jumper Wires**: 16x Male-to-Male (M-M).
+* **Jumper Wires**: 16x Male-to-Female (M-F).
+* **Jumper Wires**: 8x Male-to-Male (M-M).
 
 ---
 
@@ -32,5 +33,6 @@
 
 ### 🔌 Conexiones y prototipado
 * **Protoboard**: 1x de tamaño completo (830 puntos).
-* **Cables Jumper**: 16x Macho-Macho (M-M).
+* **Cables Jumper**: 16x Macho-Hembra (M-H).
+* **Cables Jumper**: 8x Macho-Macho (M-M)
 ---
