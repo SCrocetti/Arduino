@@ -21,7 +21,7 @@ This project demonstrates manual control of an **8x8 LED Matrix (1088BS)** witho
 | **Arduino Uno / Nano** | 1 | Control logic unit |
 | **1088BS 8x8 LED Matrix** | 1 | Common Anode display |
 | **Resistors (220Ω - 1kΩ)** | 8 | Current limiters for active rows |
-| **Jumper Wires** | 16+ | Assorted connections |
+| **Jumper Wires** | 24+ | Assorted connections |
 
 > [!NOTE]
 > For the complete part list, check the [BOM](./hardware/bom.md) in the hardware folder.
@@ -72,7 +72,7 @@ Este proyecto demuestra el control manual de una **Matriz de LEDs 8x8 (1088BS)**
 | **Arduino Uno / Nano** | 1 | Unidad de lógica de control |
 | **Matriz de LEDs 8x8 1088BS** | 1 | Pantalla de Ánodo Común |
 | **Resistencias (220Ω - 1kΩ)** | 8 | Limitadores de corriente para filas activas |
-| **Cables Jumper** | 16+ | Conexiones variadas |
+| **Cables Jumper** | 24+ | Conexiones variadas |
 
 ---
 
