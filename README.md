@@ -1,10 +1,11 @@
 # 🔌 Arduino Projects Portfolio
 
-[English](#-english) | [Español](#-español)
+[English](#english) | [Español](#espanol)
 
 ---
 
 ## 🇺🇸 English
+<a id="english"></a>
 
 A curated collection of **Arduino-based electronics projects**, ranging from fundamental circuits to more complex systems like LED matrices and games.
 
@@ -22,9 +23,9 @@ A curated collection of **Arduino-based electronics projects**, ranging from fun
 ```
 arduino-projects/
 ├── projects/
-│   ├── 01_blinking_led_button/
-│   ├── 02_relay_leds_tactile_switch/
-│   ├── 03_led_matrix/
+│   ├── 01_toggle_led_system/
+│   ├── 02_relay_dc_switching/
+│   ├── 03_full_8x8_led_matrix_sweep/
 │   ├── 04_led_switching_experiments/
 │   ├── 05_led_matrix_sweep/
 │   ├── 06_shift_register/
@@ -46,21 +47,23 @@ tools/    # scripts and utilities
 
 ## 🚀 Projects
 
-### 🔹 01 - Blinking LED & Button
+### 🔹 01 - Toggle LED System
 
 Basic GPIO control with input/output handling.
 
 ---
 
-### 🔹 02 - Relay, LEDs & Tactile Switch
+### 🔹 02 - Relay DC Switching
 
 Controlling higher-power components using relays.
 
 ---
 
-### 🔹 03 - LED Matrix
+### 🔹 03 - Full 8x8 LED Matrix Sweep 
 
-Displaying patterns and animations on an LED matrix.
+Sequential sweep across an 8x8 LED matrix.
+
+![Matrix Sweep Demo](./projects/03_full_8x8_led_matrix_sweep/media/demostration.gif)
 
 ---
 
@@ -158,6 +161,7 @@ See the [LICENSE](./LICENSE) file for details.
 ---
 
 ## 🇪🇸 Español
+<a id="espanol"></a>
 
 Una colección de proyectos electrónicos basados en **Arduino**, que van desde circuitos fundamentales hasta sistemas más complejos como matrices LED y juegos.
 
@@ -175,9 +179,9 @@ Una colección de proyectos electrónicos basados en **Arduino**, que van desde 
 ```
 arduino-projects/
 ├── projects/
-│   ├── 01_blinking_led_button/
-│   ├── 02_relay_leds_tactile_switch/
-│   ├── 03_led_matrix/
+│   ├── 01_toggle_led_system/
+│   ├── 02_relay_dc_switching/
+│   ├── 03_full_8x8_led_matrix_sweep/
 │   ├── 04_led_switching_experiments/
 │   ├── 05_led_matrix_sweep/
 │   ├── 06_shift_register/
@@ -199,7 +203,7 @@ tools/    # scripts y utilidades
 
 ## 🚀 Proyectos
 
-### 🔹 01 - LED Parpadeante y Botón
+### 🔹 01 - Sistema de Alternancia de LED
 
 Control básico de GPIO con entradas y salidas.
 
@@ -211,9 +215,11 @@ Control de componentes de mayor potencia mediante relés.
 
 ---
 
-### 🔹 03 - Matriz LED
+### 🔹 03 - Barrido de Matriz LED Completa 8x8
 
-Visualización de patrones y animaciones.
+Barrido secuencial a través de una matriz de LEDs de 8x8.
+
+![Demo de Barrido de Matrix](./projects/03_full_8x8_led_matrix_sweep/media/demostration.gif)
 
 ---
 
