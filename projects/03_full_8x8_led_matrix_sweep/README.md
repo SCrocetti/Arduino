@@ -33,16 +33,16 @@ This section contains all technical specifications and wiring diagrams required 
 ### Technical Reference
 For specific wiring details and coordinate mapping, refer to the following documents in the `hardware/` folder:
 
-* 📍 [**Pinout Reference**](./hardware/pinout_reference.md) — Mapping of physical pins to rows and columns.
+* 📍 [**Pinout Reference**](../../docs/hardware_ref/A-1088B8/pinout_reference.md) — Mapping of physical pins to rows and columns.
 * 🔗 [**Connection Guide**](./hardware/connections.md) — Step-by-step wiring for microcontrollers.
-* 📄 [**LED Matrix Datasheet**](./docs/datasheets/A-1088BS-1.pdf) — Full manufacturer specifications.
+* 📄 [**LED Matrix Datasheet**](../../docs/datasheets/A-1088BS-1.pdf) — Full manufacturer specifications.
 
 ---
 
 ### Circuit Schematic
 The matrix is controlled by mapping pins to all 8 rows and 8 columns. Ensure the current-limiting resistors are placed on the anode (row) lines.
 
-![A-1088B8 Pinout](./hardware/A-1088B8_pinout.png)
+![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
 
 ![LED Matrix Schematic](./media/circuit_schemma.png)
 
@@ -84,16 +84,16 @@ Esta sección contiene todas las especificaciones técnicas y diagramas de conex
 ### Referencia Técnica 
 Para detalles específicos de conexiones y mapeo de coordenadas, vea los siguientes documentos en la carpeta `hardware/`:
 
-* 📍 [**Referencia de Pines**](./hardware/pinout_reference.md) — Mapeo de pines físicos a filas y columnas.
+* 📍 [**Referencia de Pines**](../../docs/hardware_ref/A-1088B8/pinout_reference.md)  — Mapeo de pines físicos a filas y columnas.
 * 🔗 [**Guía de Conexión**](./hardware/connections.md) — Guía paso a paso para cableado a microcontroladores.
-* 📄 [**Datasheet de la Matriz de LEDs**](./docs/datasheets/A-1088BS-1.pdf) — Especificaciones completas del fabricante.
+* 📄 [**Datasheet de la Matriz de LEDs**](../../docs/datasheets/A-1088BS-1.pdf)  — Especificaciones completas del fabricante.
 
 ---
 
 ### Esquema del Circuito
 La matriz se controla mapeando los pines a las 8 filas y 8 columnas. Asegúrese de que las resistencias limitadoras de corriente estén colocadas en las líneas de ánodo (filas).
 
-![A-1088B8 Pinout](./hardware/A-1088B8_pinout.png)
+![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
 
 ![Esquema de la Matriz LED](./media/circuit_schemma.png)
 
