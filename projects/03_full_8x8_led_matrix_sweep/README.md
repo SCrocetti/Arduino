@@ -35,7 +35,7 @@ For specific wiring details and coordinate mapping, refer to the following docum
 
 * 📍 [**Pinout Reference**](./hardware/pinout_reference.md) — Mapping of physical pins to rows and columns.
 * 🔗 [**Connection Guide**](./hardware/connections.md) — Step-by-step wiring for microcontrollers.
-* 📄 [**LED Matrix Datasheet**](./docs/A-1088BS-1.pdf) — Full manufacturer specifications.
+* 📄 [**LED Matrix Datasheet**](./docs/datasheets/A-1088BS-1.pdf) — Full manufacturer specifications.
 
 ---
 
@@ -74,6 +74,20 @@ Este proyecto demuestra el control manual de una **Matriz de LEDs 8x8 (1088BS)**
 | **Resistencias (220Ω - 1kΩ)** | 8 | Limitadores de corriente para filas activas |
 | **Cables Jumper** | 24+ | Conexiones variadas |
 
+> [!NOTA]
+> Para la lista completa de componentes, ver el [BOM](./hardware/bom.md) en la carpeta de hardware.
+
+## Documentación de Hardware 
+
+Esta sección contiene todas las especificaciones técnicas y diagramas de conexión para interactuar con la matriz de LEDs.
+
+### Referencia Técnica 
+Para detalles específicos de conexiones y mapeo de coordenadas, vea los siguientes documentos en la carpeta `hardware/`:
+
+* 📍 [**Referencia de Pines**](./hardware/pinout_reference.md) — Mapeo de pines físicos a filas y columnas.
+* 🔗 [**Guía de Conexión**](./hardware/connections.md) — Guía paso a paso para cableado a microcontroladores.
+* 📄 [**Datasheet de la Matriz de LEDs**](./docs/datasheets/A-1088BS-1.pdf) — Especificaciones completas del fabricante.
+
 ---
 
 ### Esquema del Circuito
@@ -89,5 +103,3 @@ La matriz se controla mapeando los pines a las 8 filas y 8 columnas. Asegúrese 
 Este es el cableado real del Arduino Uno y la matriz 1088BS utilizando una protoboard para las resistencias limitadoras de corriente.
 
 ![Montaje Físico](./media/mounting.jpeg)
-
----
