@@ -1,4 +1,4 @@
-# 📑 Bill of Materials: 03 - Full 8x8 LED Matrix Sweep / Lista de Materiales: 03 - Barrido de Matriz LED Completa 8x8
+# 📑 Bill of Materials
 
 [English](#english) | [Español](#espanol)
 
