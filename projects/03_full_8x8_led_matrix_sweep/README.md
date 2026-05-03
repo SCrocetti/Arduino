@@ -24,7 +24,7 @@ This project demonstrates manual control of an **8x8 LED Matrix (1088BS)** witho
 | **Jumper Wires** | 24+ | Assorted connections |
 
 > [!NOTE]
-> For the complete part list, check the [BOM](./hardware/bom.md) in the hardware folder.
+> For the complete part list, check the [BOM](../../shared/hardware/matrix-8x8-common/bom.md) in the hardware folder.
 
 ## Hardware Documentation
 
@@ -34,7 +34,7 @@ This section contains all technical specifications and wiring diagrams required 
 For specific wiring details and coordinate mapping, refer to the following documents in the `hardware/` folder:
 
 * 📍 [**Pinout Reference**](../../docs/hardware_ref/A-1088B8/pinout_reference.md) — Mapping of physical pins to rows and columns.
-* 🔗 [**Connection Guide**](./hardware/connections.md) — Step-by-step wiring for microcontrollers.
+* 🔗 [**Connection Guide**](../../shared/hardware/matrix-8x8-common/connections.md) — Step-by-step wiring for microcontrollers.
 * 📄 [**LED Matrix Datasheet**](../../docs/datasheets/A-1088BS-1.pdf) — Full manufacturer specifications.
 
 ---
@@ -44,7 +44,7 @@ The matrix is controlled by mapping pins to all 8 rows and 8 columns. Ensure the
 
 ![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
 
-![LED Matrix Schematic](./media/circuit_schemma.png)
+![LED Matrix Schematic](../../shared/media/matrix-8x8-common/circuit_schemma.png)
 
 ---
 
@@ -75,7 +75,7 @@ Este proyecto demuestra el control manual de una **Matriz de LEDs 8x8 (1088BS)**
 | **Cables Jumper** | 24+ | Conexiones variadas |
 
 > [!NOTA]
-> Para la lista completa de componentes, ver el [BOM](./hardware/bom.md) en la carpeta de hardware.
+> Para la lista completa de componentes, ver el [BOM](../../shared/hardware/matrix-8x8-common/bom.md) en la carpeta de hardware.
 
 ## Documentación de Hardware 
 
@@ -85,7 +85,7 @@ Esta sección contiene todas las especificaciones técnicas y diagramas de conex
 Para detalles específicos de conexiones y mapeo de coordenadas, vea los siguientes documentos en la carpeta `hardware/`:
 
 * 📍 [**Referencia de Pines**](../../docs/hardware_ref/A-1088B8/pinout_reference.md)  — Mapeo de pines físicos a filas y columnas.
-* 🔗 [**Guía de Conexión**](./hardware/connections.md) — Guía paso a paso para cableado a microcontroladores.
+* 🔗 [**Guía de Conexión**](../../shared/hardware/matrix-8x8-common/connections.md) — Guía paso a paso para cableado a microcontroladores.
 * 📄 [**Datasheet de la Matriz de LEDs**](../../docs/datasheets/A-1088BS-1.pdf)  — Especificaciones completas del fabricante.
 
 ---
@@ -95,7 +95,7 @@ La matriz se controla mapeando los pines a las 8 filas y 8 columnas. Asegúrese 
 
 ![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
 
-![Esquema de la Matriz LED](./media/circuit_schemma.png)
+![Esquema de la Matriz LED](../../shared/media/matrix-8x8-common/circuit_schemma.png)
 
 ---
 
