@@ -43,8 +43,8 @@ For specific wiring details and coordinate mapping, refer to the following docum
 
 ### Library Configuration
 The library is designed for flexibility. You can modify the pin mapping without changing the core logic by editing the configuration files:
-* `LedMatrixDrawer.h`: Defines the base pinout.
-* `LedMatrixDrawerConfig.h`: Allows custom overrides for different PCB or breadboard layouts.
+* `A1088BSDirect.h`: Defines the base pinout.
+* `A1088BSDirectConfig.h`: Allows custom overrides for different PCB or breadboard layouts.
 
 ### Circuit Schematic
 The library uses **row-at-a-time multiplexing**. To enable full functionality, the wiring maps 16 Arduino pins to the matrix.
@@ -94,8 +94,8 @@ Para detalles específicos de conexiones y mapeo de coordenadas, vea los siguien
 
 ### Configuración de la Librería
 La librería está diseñada para ser flexible. Es posible modificar el mapeo de pines sin cambiar la lógica central editando los archivos de configuración:
-* `LedMatrixDrawer.h`: Define el pinout base.
-* `LedMatrixDrawerConfig.h`: Permite personalizaciones para diferentes layouts de PCB o protoboard.
+* `A1088BSDirect.h`: Define el pinout base.
+* `A1088BSDirectConfig.h`: Permite personalizaciones para diferentes layouts de PCB o protoboard.
 
 ### Esquema del Circuito
 La librería utiliza **multiplexado por filas**. Para habilitar la funcionalidad completa, el cableado mapea 16 pines de Arduino a la matriz.
