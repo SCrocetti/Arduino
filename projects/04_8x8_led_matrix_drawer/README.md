@@ -1,4 +1,4 @@
-# 🔹 04 - LED Matrix Drawer Library / 04 - Librería de Dibujo para Matriz LED
+# 🔹 04 -  LED Matrix Drawer / 04 - Dibujador para Matriz LED
 
 [English](#english) | [Español](#espanol)
 
@@ -8,16 +8,20 @@
 <a id="english"></a>
 
 ### Overview
-This project introduces a specialized Arduino library designed to control a **full 8x8 LED matrix (1088BS)**. Moving beyond basic sequential sweeps, this library provides a high-level abstraction for "drawing" static frames and complex animations by managing low-level multiplexing and timing.
+This project is a practical guide and **use-case example** for the **A1088BSDirect Library**. While the library encapsulates all the complex multiplexing logic, frame drawing, and animation engines, this repository provides the **physical implementation**: detailed wiring instructions, hardware connections, and a clean example code that simply calls the library's built-in functions to demonstrate its capabilities on a **1088BS 8x8 LED matrix**.
 
-### Features
-* **Full 8x8 Support**: High-resolution icons and patterns using all 64 LEDs.
-* **Configurable Pinout**: Flexible architecture that allows redefining row and column pins via software to match any hardware layout.
-* **Frame Buffering**: Display static images defined as bitmaps.
-* **Animation Engine**: Sequence-based playback with configurable frame delays.
-* **Ghosting Prevention**: Implementation of high-impedance states and active-high/low logic to ensure visual clarity.
+### 📚 Library Reference
+To install the driver or explore the internal logic (multiplexing, ghosting prevention, calibrated timing), visit the main library repository:
+👉 **[A1088BSDirect Library README](../../shared/firmware/lib_a1088bs_direct/README.md)**
+
+### What this Project Covers
+* **Hardware Setup**: Detailed schematics for connecting the 16-pin matrix to an Arduino.
+* **Wiring Documentation**: Pin-to-pin mapping required for the library's default configuration.
+* **Implementation Example**: A simple sketch that demonstrates calling `displayFrame()` and `playAnimation()` without needing to write low-level code.
+* **Visual Clarity**: Guidance on using resistors to ensure a crisp, flicker-free display.
 
 ### Hardware Components
+
 | Component | Quantity | Description |
 | :--- | :--- | :--- |
 | **Arduino Uno / Nano** | 1 | Control logic unit |
@@ -33,42 +37,43 @@ This project introduces a specialized Arduino library designed to control a **fu
 This section contains technical specifications and wiring diagrams required to interface with the library.
 
 ### Technical Reference
+
 For specific wiring details and coordinate mapping, refer to the following documents:
 
+
 * 📍 [**Pinout Reference**](../../docs/hardware_ref/A-1088B8/pinout_reference.md) — Mapping of physical pins to rows and columns.
+
 * 🔗 [**Connection Guide**](../../shared/hardware/A-1088B8-Direct/connections.md) — Step-by-step wiring for microcontrollers.
+
 * 📄 [**LED Matrix Datasheet**](../../docs/datasheets/A-1088BS-1.pdf) — Full manufacturer specifications.
 
 ---
 
-### Library Configuration
-The library is designed for flexibility. You can modify the pin mapping without changing the core logic by editing the configuration files:
-* `A1088BSDirect.h`: Defines the base pinout.
-* `A1088BSDirectConfig.h`: Allows custom overrides for different PCB or breadboard layouts.
-
 ### Circuit Schematic
+
 The library uses **row-at-a-time multiplexing**. To enable full functionality, the wiring maps 16 Arduino pins to the matrix.
 
 ![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
 
 ![LED Matrix Schematic](../../shared/media/A-1088B8-Direct/circuit_schemma.png)
 
----
-
 ## 🇪🇸 Español
 <a id="espanol"></a>
 
 ### Resumen
-Este proyecto presenta una librería especializada de Arduino diseñada para controlar una **matriz LED completa de 8x8 (1088BS)**. Superando los barridos secuenciales básicos, esta librería proporciona una abstracción de alto nivel para "dibujar" cuadros estáticos y animaciones complejas gestionando el multiplexado y los tiempos de bajo nivel.
+Este proyecto es una guía práctica y un **ejemplo de caso de uso** para la **Librería A1088BSDirect**. Mientras que la librería encapsula toda la lógica compleja de multiplexado, dibujo de cuadros y motores de animación, este repositorio proporciona la **implementación física**: instrucciones detalladas de cableado, conexiones de hardware y un código de ejemplo limpio que simplemente llama a las funciones integradas de la librería para demostrar sus capacidades en una **matriz LED 1088BS de 8x8**.
 
-### Características
-* **Soporte Completo 8x8**: Iconos y patrones de alta resolución utilizando los 64 LEDs.
-* **Pinout Configurable**: Arquitectura flexible que permite redefinir los pines de filas y columnas por software para adaptarse a cualquier montaje.
-* **Búfer de Cuadros**: Muestra imágenes estáticas definidas como mapas de bits (bitmaps).
-* **Motor de Animación**: Reproducción basada en secuencias con retrasos de cuadro configurables.
-* **Prevención de Ghosting**: Implementación de estados de alta impedancia y lógica activa para asegurar claridad visual.
+### 📚 Referencia de la Librería
+Para instalar el controlador o explorar la lógica interna (multiplexado, prevención de ghosting, tiempos calibrados), visite el repositorio de la libreria:
+👉 **[README de la Librería A1088BSDirect](../../shared/firmware/lib_a1088bs_direct/README.md)**
+
+### Contenido del Proyecto
+* **Configuración de Hardware**: Esquemas detallados para conectar los 16 pines de la matriz al Arduino.
+* **Documentación de Cableado**: Mapeo pin a pin necesario para la configuración por defecto de la librería.
+* **Ejemplo de Implementación**: Un sketch simple que demuestra cómo llamar a `displayFrame
 
 ### Componentes de Hardware
+
 | Componente | Cantidad | Descripción |
 | :--- | :--- | :--- |
 | **Arduino Uno / Nano** | 1 | Unidad de lógica de control |
@@ -79,25 +84,24 @@ Este proyecto presenta una librería especializada de Arduino diseñada para con
 > [!NOTA]
 > Para la lista completa de componentes, ver el [BOM](../../shared/hardware/A-1088B8-Direct/bom.md) en la carpeta de hardware.
 
-## Documentación de Hardware 
+## Documentación de Hardware
 
 Esta sección contiene las especificaciones técnicas y diagramas de conexión necesarios para la librería.
 
-### Referencia Técnica 
+### Referencia Técnica
+
 Para detalles específicos de conexiones y mapeo de coordenadas, vea los siguientes documentos:
 
 * 📍 [**Referencia de Pines**](../../docs/hardware_ref/A-1088B8/pinout_reference.md) — Mapeo de pines físicos a filas y columnas.
+
 * 🔗 [**Guía de Conexión**](../../shared/hardware/A-1088B8-Direct/connections.md) — Guía paso a paso para cableado a microcontroladores.
+
 * 📄 [**Datasheet de la Matriz de LEDs**](../../docs/datasheets/A-1088BS-1.pdf) — Especificaciones completas del fabricante.
 
 ---
 
-### Configuración de la Librería
-La librería está diseñada para ser flexible. Es posible modificar el mapeo de pines sin cambiar la lógica central editando los archivos de configuración:
-* `A1088BSDirect.h`: Define el pinout base.
-* `A1088BSDirectConfig.h`: Permite personalizaciones para diferentes layouts de PCB o protoboard.
-
 ### Esquema del Circuito
+
 La librería utiliza **multiplexado por filas**. Para habilitar la funcionalidad completa, el cableado mapea 16 pines de Arduino a la matriz.
 
 ![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
