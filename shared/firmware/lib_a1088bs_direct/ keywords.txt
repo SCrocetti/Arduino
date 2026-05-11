@@ -1,5 +1,3 @@
-sweepMatrix      KEYWORD2
-sweepArray       KEYWORD2
-LedMatrixDrawer  KEYWORD1
-transition_matrix LITERAL1
-delay_time       LITERAL1
+A1088BSDirect	KEYWORD1
+displayFrame	KEYWORD2
+playAnimation	KEYWORD2
