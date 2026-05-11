@@ -1,81 +1,73 @@
-#include <LedMatrixDrawer.h>
-#include <LedMatrixDrawerConfig.h>
+#include <A1088BSDirect.h>
+#include <A1088BSDirectConfig.h>
 
-bool m_matrix[6][6]={
-  {true,false,false,false,false,true},
-  {true,true,false,false,true,true},
-  {true,false,true,true,false,true},
-  {true,false,true,true,false,true},
-  {true,false,false,false,false,true},
-  {true,false,false,false,false,true}
+// 1. Static Frame: "X inside a rectangle"
+const bool xRectFrame[8][8] = {
+  {1,1,1,1,1,1,1,1}, // Top border
+  {1,1,0,0,0,0,1,1}, // X starts
+  {1,0,1,0,0,1,0,1},
+  {1,0,0,1,1,0,0,1},
+  {1,0,0,1,1,0,0,1},
+  {1,0,1,0,0,1,0,1},
+  {1,1,0,0,0,0,1,1},
+  {1,1,1,1,1,1,1,1}  // Bottom border
 };
 
-bool i_matrix[6][6]={
-  {false,true,true,true,true,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,false,true,true,false,false},
-  {false,true,true,true,true,false}
+// 2. Animation Frames: "HELLO" (8x8)
+const bool h_frame[8][8] = {
+  {1,0,0,0,0,0,0,1}, {1,0,0,0,0,0,0,1}, {1,0,0,0,0,0,0,1},
+  {1,1,1,1,1,1,1,1}, {1,1,1,1,1,1,1,1}, {1,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,1}, {1,0,0,0,0,0,0,1}
 };
 
-bool a_matrix[6][6]={
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true}
-  
+const bool e_frame[8][8] = {
+  {1,1,1,1,1,1,1,1}, {1,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0},
+  {1,1,1,1,1,1,1,0}, {1,1,1,1,1,1,1,0}, {1,0,0,0,0,0,0,0},
+  {1,0,0,0,0,0,0,0}, {1,1,1,1,1,1,1,1}
 };
 
-bool u_matrix[6][6]={
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,true,true,true,true}
+const bool l_frame[8][8] = {
+  {1,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0},
+  {1,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0},
+  {1,1,1,1,1,1,1,1}, {1,1,1,1,1,1,1,1}
 };
 
-bool o_matrix[6][6]={
-  {false,true,true,true,true,false},
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {false,true,true,true,true,false}
+const bool o_frame[8][8] = {
+  {0,1,1,1,1,1,1,0}, {1,1,0,0,0,0,1,1}, {1,0,0,0,0,0,0,1},
+  {1,0,0,0,0,0,0,1}, {1,0,0,0,0,0,0,1}, {1,0,0,0,0,0,0,1},
+  {1,1,0,0,0,0,1,1}, {0,1,1,1,1,1,1,0}
 };
 
-bool r_matrix[6][6]={
-  {true,true,true,true,true,true},
-  {true,true,false,false,true,true},
-  {true,true,false,false,true,true},
-  {true,true,true,true,true,true},
-  {true,true,false,true,true,false},
-  {true,true,false,false,true,true}
+// Instance of your new library using the config pinout
+A1088BSDirect matrix(LEDMATRIX_PINOUT);
+
+// Animation array pointing to the frames
+const bool* const hello_animation[] = {
+  &h_frame[0][0],
+  &e_frame[0][0],
+  &l_frame[0][0],
+  &l_frame[0][0],
+  &o_frame[0][0]
 };
 
-LedMatrixDrawer drawer;
+const uint8_t animCount = sizeof(hello_animation) / sizeof(hello_animation[0]);
 
-const bool* const animation[] = {
-  &m_matrix[0][0],
-  &i_matrix[0][0],
-  &a_matrix[0][0],
-  &u_matrix[0][0],
-  &m_matrix[0][0],
-  &o_matrix[0][0],
-  &r_matrix[0][0]
-};
-
-
-int numBitmaps;
 void setup() {
-  numBitmaps = sizeof(animation) / sizeof(animation[0]);
+  // Initialization handled in constructor
 }
 
 void loop() {
-  drawer.sweepArray(animation,numBitmaps,1500,250);
+  // --- Method 1: Display a single frame ---
+  // Shows the "X in a Box" for 2 seconds
+  matrix.displayFrame(xRectFrame, 2000);
+
+  // Small gap of darkness (optional)
+  delay(200);
+
+  // --- Method 2: Play an animation ---
+  // Plays HELLO with 800ms per letter
+  matrix.playAnimation(hello_animation, animCount, 800);
+
+  // Wait 1 second before restarting the whole loop
   delay(1000);
 }
-
