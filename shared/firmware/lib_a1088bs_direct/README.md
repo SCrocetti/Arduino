@@ -36,13 +36,15 @@ lib_a1088bs_direct
 
 ### 🛠️ Installation & Setup
 1. **Move the Folder**: Move the `lib_a1088bs_direct` folder into your `Arduino/libraries` directory.
-2. **Verify Configuration**: Open `src/A1088BSDirectConfig.h` to verify that the pin mapping matches your physical wiring.
-3. **Restart IDE**: Restart your Arduino IDE.
-
+2. **Library Configuration**: The library is designed to be flexible. You can modify the pin mapping without changing the core logic by editing the configuration files:
+    * `A1088BSDirect.h`: Defines the base pinout.
+    * `A1088BSDirectConfig.h`: Allows customizations for different PCB or breadboard layouts.
+3. **Verify Pinout**: Open `src/A1088BSDirectConfig.h` to verify that the pin mapping matches your physical wiring.
+4. **Restart IDE**: Restart your Arduino IDE.
 ---
 
 ### 💻 Quick Start
-To get started, initialize the library using the `LEDMATRIX_PINOUT` defined in your configuration file. You can then use `displayFrame` for static images or `playAnimation` to iterate through an array of frames.
+To get started, initialize the library using the `LEDMATRIX_PINOUT` defined in `A1088BSDirectConfig.h` file. You can then use `displayFrame` for static images or `playAnimation` to iterate through an array of frames.
 
 ``` c++
 #include <A1088BSDirect.h>
@@ -130,13 +132,15 @@ lib_a1088bs_direct
 
 ### 🛠️ Instalación y Configuración
 1. **Mover la Carpeta**: Mueva la carpeta `lib_a1088bs_direct` a su directorio de `Arduino/libraries`.
-2. **Verificar Configuración**: Abra `src/A1088BSDirectConfig.h` para verificar que el mapeo de pines coincida con su cableado físico.
-3. **Reiniciar IDE**: Reinicie su IDE de Arduino.
-
+2. **Configuración de la Librería**: La librería está diseñada para ser flexible. Es posible modificar el mapeo de pines sin cambiar la lógica central editando los archivos de configuración:
+    * `A1088BSDirect.h`: Define el pinout base.
+    * `A1088BSDirectConfig.h`: Permite personalizaciones para diferentes layouts de PCB o protoboard.
+3. **Verificar Configuración**: Abra `src/A1088BSDirectConfig.h` para verificar que el mapeo de pines coincida con su cableado físico.
+4. **Reiniciar IDE**: Reinicie su IDE de Arduino.
 ---
 
 ### 💻 Inicio Rápido
-Para comenzar, inicialice la librería utilizando el `LEDMATRIX_PINOUT` definido en su archivo de configuración. Luego puede usar `displayFrame` para imágenes estáticas o `playAnimation` para iterar a través de un array de cuadros.
+Para comenzar, inicialice la librería utilizando el `LEDMATRIX_PINOUT` definido en el archivo `A1088BSDirectConfig.h`. Luego puede usar `displayFrame` para imágenes estáticas o `playAnimation` para iterar a través de un array de cuadros.
 
 
 ``` c++
