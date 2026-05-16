@@ -1,48 +1,58 @@
 /**
- * Project: Toggle LED System
- * Description: Toggles a system state using a momentary push button. 
- * When systemIsActive is true, the LED blinks.
+ * Project: Improved Toggle LED System
+ * Description: Uses state change detection and non-blocking timing.
  */
 
-// --- Configuration Constants ---
-const int BUTTON_PIN = 3;     // The digital pin connected to the push button
-const int LED_PIN = 10;       // The digital pin connected to the LED
+const int BUTTON_PIN = 3;
+const int LED_PIN = 10;
 
-// --- State Variables ---
-int buttonState = 0;          // Current reading from the button input
-bool systemIsActive = false;  // Toggle flag to track if the system is ON or OFF
+// State Variables
+bool systemIsActive = false;
+int lastButtonState = LOW;
+
+// Timing Variables (Non-blocking)
+unsigned long lastBlinkTime = 0;
+const int blinkInterval = 500; // Blink every 500ms
+bool ledState = LOW;
 
 void setup() {
-  pinMode(BUTTON_PIN, INPUT);
+  pinMode(BUTTON_PIN, INPUT); // Consider using INPUT_PULLUP if button is wired to GND
   pinMode(LED_PIN, OUTPUT);
-  
-  // Initialize serial communication for debugging
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
-  // Read the current state of the button
-  buttonState = digitalRead(BUTTON_PIN);
+  checkButton();
   
-  // Small delay to help with primitive debouncing
-  delay(500);
-
-  if (buttonState == HIGH) {
-    Serial.println("Button pressed");
-    // Toggle the system state (ON becomes OFF, vice versa)
-    systemIsActive = !systemIsActive;
-  } else {
-    Serial.println("Button released");
-  }
-
-  // --- System Logic ---
   if (systemIsActive) {
-    // If the system is active, blink the LED
-    digitalWrite(LED_PIN, HIGH);
-    delay(500);
-    digitalWrite(LED_PIN, LOW);
+    runBlinkLogic();
   } else {
-    // Ensure the LED is off when the system is inactive
     digitalWrite(LED_PIN, LOW);
+  }
+}
+
+void checkButton() {
+  int currentButtonState = digitalRead(BUTTON_PIN);
+
+  // Check if the button state changed from LOW to HIGH (The "Edge")
+  if (currentButtonState == HIGH && lastButtonState == LOW) {
+    systemIsActive = !systemIsActive;
+    Serial.print("System Active: ");
+    Serial.println(systemIsActive ? "ON" : "OFF");
+    
+    delay(50); // Simple "Debounce" to ignore electrical noise
+  }
+  
+  lastButtonState = currentButtonState;
+}
+
+void runBlinkLogic() {
+  unsigned long currentMillis = millis();
+  
+  // Blink without using delay()
+  if (currentMillis - lastBlinkTime >= blinkInterval) {
+    lastBlinkTime = currentMillis;
+    ledState = !ledState;
+    digitalWrite(LED_PIN, ledState);
   }
 }
