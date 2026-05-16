@@ -34,6 +34,13 @@ The LED is connected to a digital output pin, while the button is connected to a
 
 ---
 
+### Physical Assembly
+This is the real-world wiring of the Arduino Uno, the push button and the LED using a breadboard for the current-limiting resistors.
+
+![Physical Mounting](./media/mounting.jpeg)
+ 
+---
+
 ## 🇪🇸 Español
 <a id="espanol"></a>
 
@@ -60,4 +67,7 @@ El LED está conectado a un pin de salida digital, mientras que el botón está 
 
 ![Esquema y Diagrama de Cableado](./media/circuit_schemma.png)
 
----
+### Montaje Físico
+Este es el cableado real del Arduino Uno, el pulsador y el LED, utilizando una protoboard para las resistencias limitadoras de corriente.
+
+![Montaje Físico](./media/mounting.jpeg)
