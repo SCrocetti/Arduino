@@ -26,13 +26,12 @@ arduino-projects/
 │   ├── 01_toggle_led_system/
 │   ├── 02_relay_dc_switching/
 │   ├── 03_full_8x8_led_matrix_sweep/
-│   ├── 04_led_switching_experiments/
-│   ├── 05_led_matrix_sweep/
-│   ├── 06_shift_register/
-│   ├── 07_led_matrix_shift_register/
-│   ├── 08_snake_game/
-│   ├── 09_rfid_experiments/
-│   └── 10_stepper_velocity_control/
+│   ├── 04_8x8_led_matrix_drawer/
+│   ├── 05_shift_register/
+│   ├── 06_led_matrix_shift_register/
+│   ├── 07_snake_game/
+│   ├── 08_rfid_experiments/
+│   └── 09_stepper_velocity_control/
 ```
 
 > ⚠️ Planned structure (future additions):
@@ -51,6 +50,7 @@ tools/    # scripts and utilities
 
 Basic GPIO control with input/output handling.
 
+![Toggle LED Demo](./projects/01_toggle_led_system/media/demostration.gif)
 ---
 
 ### 🔹 02 - Relay DC Switching
@@ -67,43 +67,37 @@ Sequential sweep across an 8x8 LED matrix.
 
 ---
 
-### 🔹 04 - LED Switching Experiments
+### 🔹 04 - 8x8 LED Matrix Drawer
 
-Exploring timing and LED control techniques.
-
----
-
-### 🔹 05 - LED Matrix Sweep
-
-Animated sweeping patterns across a matrix.
+Hardware wiring and implementation guide for the A1088BSDirect 8x8 LED matrix library.
 
 ---
 
-### 🔹 06 - Shift Register
+### 🔹 05 - Shift Register
 
 Expanding outputs using a 74HC595 shift register.
 
 ---
 
-### 🔹 07 - LED Matrix + Shift Register
+### 🔹 06 - LED Matrix + Shift Register
 
 Combining matrix control with shift registers.
 
 ---
 
-### 🔹 08 - Snake Game 🐍
+### 🔹 07 - Snake Game 🐍
 
 A playable Snake game on an LED matrix.
 
 ---
 
-### 🔹 09 - RFID Experiments
+### 🔹 08 - RFID Experiments
 
 Reading and writing RFID tags using the RC522 module.
 
 ---
 
-### 🔹 10 - Stepper Velocity Control
+### 🔹 09 - Stepper Velocity Control
 
 Controlling speed and direction of a 28BYJ-48 stepper motor using a potentiometer.
 
@@ -182,13 +176,12 @@ arduino-projects/
 │   ├── 01_toggle_led_system/
 │   ├── 02_relay_dc_switching/
 │   ├── 03_full_8x8_led_matrix_sweep/
-│   ├── 04_led_switching_experiments/
-│   ├── 05_led_matrix_sweep/
-│   ├── 06_shift_register/
-│   ├── 07_led_matrix_shift_register/
-│   ├── 08_snake_game/
-│   ├── 09_rfid_experiments/
-│   └── 10_stepper_velocity_control/
+│   ├── 04_8x8_led_matrix_drawer/
+│   ├── 05_shift_register/
+│   ├── 06_led_matrix_shift_register/
+│   ├── 07_snake_game/
+│   ├── 08_rfid_experiments/
+│   └── 09_stepper_velocity_control/
 ```
 
 > ⚠️ Estructura planificada (próximas incorporaciones):
@@ -207,6 +200,8 @@ tools/    # scripts y utilidades
 
 Control básico de GPIO con entradas y salidas.
 
+![Demo de Alternancia de LED](./projects/01_toggle_led_system/media/demostration.gif)
+
 ---
 
 ### 🔹 02 - Relay, LEDs y Pulsador
@@ -223,43 +218,38 @@ Barrido secuencial a través de una matriz de LEDs de 8x8.
 
 ---
 
-### 🔹 04 - Experimentos de Conmutación de LEDs
 
-Exploración de técnicas de control y temporización.
+### 🔹 04 - Dibujador en Matriz LED de 8x8
 
----
-
-### 🔹 05 - Barrido de Matriz LED
-
-Animaciones de barrido sobre una matriz.
+Guía de cableado de hardware e implementación para la biblioteca de la matriz LED 8x8 A1088BSDirect.
 
 ---
 
-### 🔹 06 - Registro de Desplazamiento
+### 🔹 05 - Registro de Desplazamiento
 
 Expansión de salidas usando un 74HC595.
 
 ---
 
-### 🔹 07 - Matriz LED + Registro de Desplazamiento
+### 🔹 06 - Matriz LED + Registro de Desplazamiento
 
 Combinación de matriz con registros para escalabilidad.
 
 ---
 
-### 🔹 08 - Juego Snake 🐍
+### 🔹 07 - Juego Snake 🐍
 
 Juego Snake implementado en una matriz LED.
 
 ---
 
-### 🔹 09 - Experimentos RFID
+### 🔹 08 - Experimentos RFID
 
 Lectura y escritura de tarjetas RFID con RC522.
 
 ---
 
-### 🔹 10 - Control de Velocidad de Motor Paso a Paso
+### 🔹 09 - Control de Velocidad de Motor Paso a Paso
 
 Control de velocidad y dirección de un motor 28BYJ-48 con potenciómetro.
 
