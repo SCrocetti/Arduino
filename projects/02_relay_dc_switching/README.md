@@ -34,6 +34,17 @@ The Arduino triggers the relay coil via digital pin 7. The relay's Common (COM) 
 
 ---
 
+### Physical Assembly
+This is the real-world wiring of the Arduino Uno, the relay, the push button, and the LEDs, using a breadboard for the current-limiting resistors.
+
+#### Mounting Off
+![Physical Mounting](./media/mounting_off.jpeg)
+ 
+#### Mounting On
+![Physical Mounting](./media/mounting_on.jpeg)
+
+---
+
 ## 🇪🇸 Español
 <a id="espanol"></a>
 
@@ -59,5 +70,16 @@ Este proyecto demuestra el **Aislamiento de Potencia** utilizando un relé mecá
 El Arduino activa la bobina del relé a través del pin digital 7. El pin Común (COM) del relé se conecta al terminal positivo de la batería de 9V, alternando la energía entre el LED Rojo (NC) y el LED Verde (NO).
 
 ![Esquema y Diagrama de Cableado](./media/circuit_schemma.png)
+
+---
+
+### Montaje Físico
+Este es el cableado en el mundo real del Arduino Uno, el relé, el pulsador y los LEDs, utilizando una protoboard para las resistencias limitadoras de corriente.
+
+#### Montaje Apagado
+![Montaje físico apagado](./media/mounting_off.jpeg)
+ 
+#### Montaje Encendido
+![Montaje físico encendido](./media/mounting_on.jpeg)
 
 ---
