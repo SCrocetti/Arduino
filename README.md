@@ -57,6 +57,8 @@ Basic GPIO control with input/output handling.
 
 Controlling higher-power components using relays.
 
+![Relay DC Switching Demo](./projects/02_relay_dc_switching/media/demostration.gif)
+
 ---
 
 ### 🔹 03 - Full 8x8 LED Matrix Sweep 
@@ -204,9 +206,11 @@ Control básico de GPIO con entradas y salidas.
 
 ---
 
-### 🔹 02 - Relay, LEDs y Pulsador
+### 🔹 02 - Conmutación de CC por Relé
 
 Control de componentes de mayor potencia mediante relés.
+
+![Demo de Conmutación de CC por Relé](./projects/02_relay_dc_switching/media/demostration.gif)
 
 ---
 
