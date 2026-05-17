@@ -73,6 +73,8 @@ Sequential sweep across an 8x8 LED matrix.
 
 Hardware wiring and implementation guide for the A1088BSDirect 8x8 LED matrix library.
 
+![LED Matrix Drawing Demo](./projects/04_8x8_led_matrix_drawer/media/demostration.gif)
+
 ---
 
 ### 🔹 05 - Shift Register
@@ -226,6 +228,8 @@ Barrido secuencial a través de una matriz de LEDs de 8x8.
 ### 🔹 04 - Dibujador en Matriz LED de 8x8
 
 Guía de cableado de hardware e implementación para la biblioteca de la matriz LED 8x8 A1088BSDirect.
+
+![Demo de Dibujador en Matriz LED](./projects/04_8x8_led_matrix_drawer/media/demostration.gif)
 
 ---
 
