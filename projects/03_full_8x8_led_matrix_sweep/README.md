@@ -99,7 +99,7 @@ La matriz se controla mapeando los pines a las 8 filas y 8 columnas. Asegúrese 
 
 ---
 
-### Ensamblaje Físico
+### Montaje Físico
 Este es el cableado real del Arduino Uno y la matriz 1088BS utilizando una protoboard para las resistencias limitadoras de corriente.
 
 ![Montaje Físico](./media/mounting.jpeg)
