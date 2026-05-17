@@ -61,7 +61,7 @@ The library uses **row-at-a-time multiplexing**. To enable full functionality, t
 This is the real-world wiring of the Arduino Uno and the 1088BS matrix using a breadboard for the current-limiting resistors.
 
 #### Pinnout Assembly
-![Pinnout Mounting](./media/mounting_pinonut.jpeg)
+![Pinnout Mounting](./media/mounting_pinnout.jpeg)
 
 #### Screen Assembly
 ![Screen Mounting](./media/mounting_screen.jpeg)
@@ -120,7 +120,7 @@ La librería utiliza **multiplexado por filas**. Para habilitar la funcionalidad
 Este es el cableado real del Arduino Uno y la matriz 1088BS utilizando una protoboard para las resistencias limitadoras de corriente.
 
 #### Montaje de Pines
-![Montaje de Pines](./media/mounting_pinonut.jpeg)
+![Montaje de Pines](./media/mounting_pinnout.jpeg)
 
 #### Montaje de Pantalla
 ![Montaje de Panyalla](./media/mounting_screen.jpeg)
