@@ -1,6 +1,6 @@
 /*
- * Project: 03 - Inner 6x6 Matrix Sweep
- * Description: Sequential sweep of the inner 6x6 grid of an 8x8 LED Matrix.
+ * Project: 03 - Full 8x8 Matrix Sweep
+ * Description: Sequential sweep of full 8x8 LED Matrix.
  * Connections: 
  * - Even pins (2-16) -> Rows (Anodes)
  * - Odd pins (3-17)  -> Columns (Cathodes)
@@ -24,19 +24,20 @@ void setup() {
 void loop() {
   // OUTER LOOP: Iterates through even pins (Rows / Anodes)
   for (int i = 2; i < 18; i += 2) {
-    
+    // Activate Row
+    digitalWrite(i, HIGH); 
     // INNER LOOP: Iterates through odd pins (Columns / Cathodes)
     for (int j = 3; j < 18; j += 2) {
       
-      // Turn ON the target LED
-      digitalWrite(i, HIGH); // Activate Row
-      digitalWrite(j, LOW);  // Activate Column (Sink current)
+       // Activate Column (Sink current)
+      digitalWrite(j, LOW); 
       
       delay(delay_time);
-
-      // Turn OFF the target LED (Prepare for the next one)
-      digitalWrite(i, LOW);
-      digitalWrite(j, HIGH);
+      
+       // Deactivate Column (Sink current)
+      digitalWrite(j, HIGH); 
     }
+    // Deactivate Row
+    digitalWrite(i, LOW);
   }
 }
