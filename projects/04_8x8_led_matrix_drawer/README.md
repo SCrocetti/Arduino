@@ -47,7 +47,6 @@ For specific wiring details and coordinate mapping, refer to the following docum
 
 * 📄 [**LED Matrix Datasheet**](../../docs/datasheets/A-1088BS-1.pdf) — Full manufacturer specifications.
 
----
 
 ### Circuit Schematic
 
@@ -56,6 +55,16 @@ The library uses **row-at-a-time multiplexing**. To enable full functionality, t
 ![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
 
 ![LED Matrix Schematic](../../shared/media/A-1088B8-Direct/circuit_schemma.png)
+
+### Physical Assembly
+
+This is the real-world wiring of the Arduino Uno and the 1088BS matrix using a breadboard for the current-limiting resistors.
+
+#### Pinnout Assembly
+![Pinnout Mounting](./media/mounting_pinonut.jpeg)
+
+#### Screen Assembly
+![Screen Mounting](./media/mounting_screen.jpeg)
 
 ## 🇪🇸 Español
 <a id="espanol"></a>
@@ -98,7 +107,6 @@ Para detalles específicos de conexiones y mapeo de coordenadas, vea los siguien
 
 * 📄 [**Datasheet de la Matriz de LEDs**](../../docs/datasheets/A-1088BS-1.pdf) — Especificaciones completas del fabricante.
 
----
 
 ### Esquema del Circuito
 
@@ -107,3 +115,12 @@ La librería utiliza **multiplexado por filas**. Para habilitar la funcionalidad
 ![A-1088B8 Pinout](../../docs/hardware_ref/A-1088B8/A-1088B8_pinout.png)
 
 ![Esquema de la Matriz LED](../../shared/media/A-1088B8-Direct/circuit_schemma.png)
+
+### Montaje Físico
+Este es el cableado real del Arduino Uno y la matriz 1088BS utilizando una protoboard para las resistencias limitadoras de corriente.
+
+#### Montaje de Pines
+![Montaje de Pines](./media/mounting_pinonut.jpeg)
+
+#### Montaje de Pantalla
+![Montaje de Panyalla](./media/mounting_screen.jpeg)
